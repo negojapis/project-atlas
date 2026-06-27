@@ -30,12 +30,7 @@ export default function Home() {
   }, [lenis, isLoading]);
 
   useEffect(() => {
-    // Prevent native scroll on body while loading as fallback
-    if (isLoading) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    // Rely only on Lenis for scroll locking, remove body manipulation to avoid getting stuck
   }, [isLoading]);
 
   return (
@@ -57,6 +52,8 @@ export default function Home() {
             className="flex flex-col"
           >
             <Hero />
+            <Manifesto />
+            <About />
             <MastimCore />
             <Ecosystem />
             <Timeline />
