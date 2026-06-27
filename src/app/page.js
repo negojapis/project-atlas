@@ -10,7 +10,6 @@ import About from "@/components/About";
 import Ecosystem from "@/components/Ecosystem";
 import MastimCore from "@/components/MastimCore";
 import Timeline from "@/components/Timeline";
-import Philosophy from "@/components/Philosophy";
 import Footer from "@/components/Footer";
 import { useLenis } from "lenis/react";
 
@@ -36,7 +35,6 @@ export default function Home() {
         <MastimCore />
         <Ecosystem />
         <Timeline />
-        <Philosophy />
         <Footer />
       </div>
     </main>
