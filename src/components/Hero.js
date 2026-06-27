@@ -2,95 +2,132 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 export default function Hero() {
-  const [time, setTime] = useState("");
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+        delayChildren: 1.5,
+      },
+    },
+  };
 
-  useEffect(() => {
-    // Generate a simple system time for the HUD
-    const interval = setInterval(() => {
-      const now = new Date();
-      const timeString = now.toISOString().split("T")[1].split(".")[0];
-      setTime(timeString + " UTC");
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
+    visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1.5, ease: "easeOut" } },
+  };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050505]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#050505] px-6">
       
-      {/* HUD: System Data (Edges) */}
-      <div className="absolute inset-0 p-6 md:p-12 pointer-events-none flex flex-col justify-between z-20">
-        <div className="flex justify-between items-start text-[#A6A6A6] font-mono text-[10px] uppercase tracking-[0.3em]">
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            transition={{ duration: 2, delay: 1 }}
-            className="flex items-center gap-3"
-          >
-            <div className="w-1.5 h-1.5 bg-[#E10613] rounded-full animate-pulse shadow-[0_0_8px_1px_#E10613]" />
-            <span>Core: Online</span>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            transition={{ duration: 2, delay: 1.2 }}
-          >
-            {time || "SYSTEM BOOT"}
-          </motion.div>
-        </div>
+      {/* Background Layers */}
+      <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
+        {/* Living Grid & Noise are globally provided, but we can add Neural Links here */}
+        <svg className="absolute w-[150%] h-[150%] opacity-10" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 0 500 Q 500 200, 1000 500 T 2000 500" stroke="#E10613" strokeWidth="0.5" fill="none" className="animate-pulse" />
+          <path d="M 0 300 Q 500 800, 1000 300 T 2000 300" stroke="#F5F5F5" strokeWidth="0.5" fill="none" opacity="0.5" />
+        </svg>
 
-        <div className="flex justify-between items-end text-[#A6A6A6] font-mono text-[10px] uppercase tracking-[0.3em]">
-          <motion.div
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            transition={{ duration: 2, delay: 1.4 }}
-          >
-            LAT: -23.5505 | LNG: -46.6333
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            transition={{ duration: 2, delay: 1.6 }}
-          >
-            Project Atlas v1.0
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Core Mark Protagonist */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
-        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-        transition={{ duration: 3, ease: "easeOut", delay: 0.5 }}
-        className="relative z-10 w-48 md:w-72 lg:w-96 aspect-square flex items-center justify-center"
-      >
-        {/* Core Pulse (Continuous Evolution) */}
+        {/* Core Glow */}
         <motion.div
           animate={{
-            scale: [1, 1.05, 1],
-            opacity: [0.1, 0.2, 0.1],
+            scale: [1, 1.1, 1],
+            opacity: [0.05, 0.1, 0.05],
           }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0 bg-[#E10613] rounded-full blur-[100px] pointer-events-none"
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-[#E10613] rounded-full blur-[150px]"
         />
+        
+        {/* Slow Particles */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIxIiBmaWxsPSIjRTEwNjEzIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')] opacity-30 animate-[pulse_10s_ease-in-out_infinite]" />
+      </div>
 
-        {/* The Core Mark Image */}
-        <Image
-          src="/icon.png"
-          alt="Mastim Core"
-          fill
-          className="object-contain drop-shadow-[0_0_15px_rgba(225,6,19,0.2)]"
-          priority
-        />
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="z-10 flex flex-col items-center text-center max-w-3xl mt-12"
+      >
+        {/* Core Mark */}
+        <motion.div variants={itemVariants} className="relative w-32 h-32 md:w-40 md:h-40 mb-16">
+          <motion.div
+            animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src="/icon.png"
+              alt="Mastim Core"
+              fill
+              className="object-contain"
+              priority
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Main Text */}
+        <motion.h1 
+          variants={itemVariants}
+          className="text-3xl md:text-5xl lg:text-6xl font-medium text-white tracking-tight mb-8 leading-[1.1]"
+        >
+          Toda grande construção <br/>começa com curiosidade.
+        </motion.h1>
+
+        {/* Secondary Text */}
+        <motion.p 
+          variants={itemVariants}
+          className="text-[#A6A6A6] text-base md:text-lg max-w-xl mx-auto mb-16 leading-relaxed"
+        >
+          Tecnologia, criatividade e visão conectando ideias, pessoas e projetos em um único ecossistema.
+        </motion.p>
+
+        {/* Tertiary Text */}
+        <motion.p 
+          variants={itemVariants}
+          className="text-[#555555] font-mono text-xs uppercase tracking-[0.2em] mb-20"
+        >
+          Felipe Gonçalves / Mastim
+        </motion.p>
+
+        {/* Buttons (Subtle) */}
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6">
+          <a
+            href="#ecosystem"
+            className="relative px-6 py-3 text-[#A6A6A6] text-sm uppercase font-mono tracking-widest hover:text-white transition-colors duration-500 group"
+          >
+            <span className="absolute inset-0 border border-[#252525] rounded-full group-hover:border-[#E10613]/50 transition-colors duration-500" />
+            Explorar ecossistema
+          </a>
+          <a
+            href="https://wa.me/5511940634737"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative px-6 py-3 text-[#555555] text-sm uppercase font-mono tracking-widest hover:text-white transition-colors duration-500 group"
+          >
+            Falar no WhatsApp
+          </a>
+        </motion.div>
       </motion.div>
 
-      {/* Living Grid / Noise is globally provided by page.js */}
+      {/* Transition: Chapter 01 */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 6, duration: 2 }}
+        className="absolute bottom-12 flex flex-col items-center gap-2 z-10"
+      >
+        <div className="w-[1px] h-12 bg-gradient-to-b from-transparent to-[#252525] mb-4" />
+        <span className="text-[#E10613] font-mono text-[10px] uppercase tracking-[0.3em]">
+          Chapter 01
+        </span>
+        <span className="text-[#555555] font-mono text-[10px] uppercase tracking-[0.3em]">
+          The Beginning
+        </span>
+      </motion.div>
+
     </section>
   );
 }
