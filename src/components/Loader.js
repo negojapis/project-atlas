@@ -15,17 +15,17 @@ export default function Loader({ onComplete }) {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // Slower pacing: 1.5s per word for more impact
+    // Muito mais lento: 2.5s por palavra
     if (step < words.length) {
       const timer = setTimeout(() => {
         setStep(s => s + 1);
-      }, 1500); 
+      }, 2500); 
       return () => clearTimeout(timer);
     } else {
-      // After "Legado.", wait longer before fading to Hero
+      // Após "Legado.", espera mais 3 segundos antes do Hero
       const timer = setTimeout(() => {
         onComplete();
-      }, 2000);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [step, onComplete]);
@@ -44,10 +44,10 @@ export default function Loader({ onComplete }) {
             {step < words.length && (
               <motion.h2
                 key={step}
-                initial={{ opacity: 0, scale: 0.9, filter: "blur(5px)" }}
+                initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
                 animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 1.1, filter: "blur(5px)" }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
+                exit={{ opacity: 0, scale: 1.05, filter: "blur(8px)" }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
                 className={`text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight absolute ${
                   step === words.length - 1 ? "text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" : "text-[#A6A6A6]"
                 }`}
