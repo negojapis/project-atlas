@@ -1,129 +1,94 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-const modulesData = [
+const projects = [
   {
-    name: "Grace Code Systems",
-    description: "Tecnologia, sites, sistemas, automações, IA e soluções digitais.",
-    link: "https://www.instagram.com/gracecode.systems/",
-    tags: ["Technology", "Systems", "AI"],
+    title: "Grace Code",
+    description: "Automação e engenharia de software focada em escala.",
+    tags: ["TECH", "AUTOMATION", "B2B"],
+    link: "#",
+    status: "Online"
   },
   {
-    name: "Divine Brew Co.",
-    description: "Café, pausa, presença e propósito.",
-    link: "https://divinebrewco.com/",
-    tags: ["Coffee", "Lifestyle"],
+    title: "Divine Brew",
+    description: "Ecossistema lifestyle e experiências sensoriais.",
+    tags: ["LIFESTYLE", "BRAND", "D2C"],
+    link: "#",
+    status: "Online"
   },
   {
-    name: "Mastimverse",
-    description: "Comunidade geek ativa: anime, mangás, games, tecnologia e conexões.",
-    link: "https://discord.gg/rzC7RA6Qt",
-    tags: ["Community", "Geek", "Discord"],
+    title: "Mastimverse",
+    description: "Ambiente imersivo de conexão e comunidade exclusiva.",
+    tags: ["COMMUNITY", "WEB3", "HUB"],
+    link: "#",
+    status: "Online"
   },
   {
-    name: "Mastim Scripts",
-    description: "Ferramentas de limpeza, otimização e manutenção para Windows.",
-    link: "https://drive.google.com/file/d/127TY_cUChI2gKstUZqomVLK7E4GYbceO/view?usp=drive_link",
-    tags: ["Tools", "Windows", "Optimization"],
+    title: "Mastim Scripts",
+    description: "Laboratório de ferramentas e scripts open-source.",
+    tags: ["OPEN-SOURCE", "LAB", "DEV"],
+    link: "#",
+    status: "Active"
   },
   {
-    name: "YouTube",
-    description: "Conteúdo, bastidores, tecnologia e criação.",
-    link: "https://www.youtube.com/@Mastimoficial",
-    tags: ["Content", "Creator"],
-  }
+    title: "YouTube",
+    description: "Produção documental focada em tecnologia e visão.",
+    tags: ["MEDIA", "DOCS", "CONTENT"],
+    link: "#",
+    status: "Recording"
+  },
 ];
-
-function ModuleCard({ data, index }) {
-  return (
-    <motion.a
-      href={data.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
-      className="group relative flex flex-col p-8 rounded-3xl bg-[#101010] border border-[#252525] overflow-hidden hover:border-[#E10613]/50 transition-colors duration-500"
-    >
-      {/* Hover Glow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#E10613]/0 to-[#E10613]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      {/* Top section: Status & Tags */}
-      <div className="flex items-center justify-between mb-12 z-10">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_1px_rgba(16,185,129,0.5)] animate-pulse" />
-          <span className="text-[#A6A6A6] text-xs font-mono uppercase tracking-wider">Online</span>
-        </div>
-        <div className="flex gap-2">
-          {data.tags.slice(0, 2).map((tag, i) => (
-            <span key={i} className="text-[10px] uppercase font-mono tracking-widest text-[#A6A6A6] px-2 py-1 rounded-full border border-[#252525]">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="z-10 mt-auto">
-        <div className="flex justify-between items-end">
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#E10613] transition-colors duration-300">
-              {data.name}
-            </h3>
-            <p className="text-[#A6A6A6] text-sm md:text-base max-w-sm leading-relaxed">
-              {data.description}
-            </p>
-          </div>
-          <div className="w-10 h-10 rounded-full bg-[#050505] border border-[#252525] flex items-center justify-center group-hover:bg-[#E10613] group-hover:border-[#E10613] transition-colors duration-300">
-            <ExternalLink className="w-4 h-4 text-[#A6A6A6] group-hover:text-white transition-colors duration-300" />
-          </div>
-        </div>
-      </div>
-    </motion.a>
-  );
-}
 
 export default function Ecosystem() {
   return (
-    <section id="ecosystem" className="relative min-h-screen py-32 px-6 overflow-hidden">
-      {/* Neural Link Background Elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-20 hidden md:block">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 200 0 L 200 400 L 800 600 L 800 1000" stroke="#252525" strokeWidth="1" fill="none" strokeDasharray="4 4" />
-          <path d="M 800 0 L 800 400 L 200 600 L 200 1000" stroke="#252525" strokeWidth="1" fill="none" strokeDasharray="4 4" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="mb-20">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[#A6A6A6] uppercase tracking-widest text-sm font-mono flex items-center gap-4 mb-4"
-          >
-            <span className="w-8 h-[1px] bg-[#E10613]" />
-            Modules
-          </motion.h2>
-          <motion.h3 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-medium text-white tracking-tight"
-          >
-            Ecossistema Mastim.
-          </motion.h3>
+    <section id="ecosystem" className="py-24 px-6 bg-[#050505]">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-16">
+          <h2 className="text-[#A6A6A6] uppercase tracking-widest text-sm font-mono mb-2">Modules</h2>
+          <p className="text-[#555555] text-xs font-mono uppercase tracking-[0.2em]">Painel de Controle</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {modulesData.map((module, index) => (
-            <div key={index} className={index === modulesData.length - 1 ? "md:col-span-2 lg:col-span-1" : ""}>
-              <ModuleCard data={module} index={index} />
-            </div>
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group relative flex flex-col bg-[#090909] border border-[#1a1a1a] p-6 hover:border-[#E10613]/50 transition-colors duration-500"
+            >
+              {/* Top Bar: Status */}
+              <div className="flex justify-between items-center mb-8 border-b border-[#1a1a1a] pb-4">
+                <div className="flex items-center gap-2">
+                  <div className={`w-1.5 h-1.5 rounded-full ${project.status === 'Online' ? 'bg-[#E10613] shadow-[0_0_8px_1px_#E10613]' : 'bg-[#555555]'}`} />
+                  <span className="text-[10px] font-mono uppercase text-[#A6A6A6] tracking-widest">
+                    Status: {project.status}
+                  </span>
+                </div>
+                <ArrowUpRight size={14} className="text-[#555555] group-hover:text-white transition-colors duration-300" />
+              </div>
+
+              {/* Title & Description */}
+              <h3 className="text-xl text-white font-medium mb-3 tracking-tight">{project.title}</h3>
+              <p className="text-[#A6A6A6] text-sm leading-relaxed mb-10 flex-grow">
+                {project.description}
+              </p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag, i) => (
+                  <span key={i} className="text-[9px] font-mono uppercase text-[#555555] border border-[#1a1a1a] px-2 py-1 tracking-widest group-hover:border-[#333333] transition-colors duration-300">
+                    [{tag}]
+                  </span>
+                ))}
+              </div>
+
+              {/* Hover Overlay Glow */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#E10613]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            </motion.div>
           ))}
         </div>
       </div>

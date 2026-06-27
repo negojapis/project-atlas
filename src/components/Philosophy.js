@@ -4,11 +4,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const phrases = [
-  "Não construo apenas empresas.",
-  "Construo experiências.",
-  "Conecto ideias.",
-  "Transformo visão em realidade.",
-  "Construo o universo Mastim.",
+  "Curiosidade.",
+  "Construção.",
+  "Visão.",
+  "Ecossistema.",
+  "Legado."
 ];
 
 export default function Philosophy() {
