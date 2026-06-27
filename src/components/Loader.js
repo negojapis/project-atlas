@@ -15,17 +15,17 @@ export default function Loader({ onComplete }) {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // 5 words, 0.6s each = 3 seconds total
+    // Slower pacing: 1.5s per word for more impact
     if (step < words.length) {
       const timer = setTimeout(() => {
         setStep(s => s + 1);
-      }, 600); // Fast, impactful flashes
+      }, 1500); 
       return () => clearTimeout(timer);
     } else {
-      // After "Legado.", wait a bit then complete
+      // After "Legado.", wait longer before fading to Hero
       const timer = setTimeout(() => {
         onComplete();
-      }, 800);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [step, onComplete]);
