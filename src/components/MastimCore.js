@@ -100,22 +100,30 @@ export default function MastimCore() {
           const isHovered = hoveredIndex === i;
 
           return (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
               className="absolute z-20 flex flex-col items-center justify-center cursor-pointer"
-              style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
+              style={{ 
+                left: '50%', 
+                top: '50%',
+                transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px))` 
+              }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border mb-2 transition-colors duration-300 ${isHovered ? 'bg-[#E10613] border-[#E10613] shadow-[0_0_10px_2px_rgba(225,6,19,0.5)]' : 'bg-[#050505] border-[#555555]'}`} />
-              <span className={`text-[8px] md:text-[10px] uppercase font-mono tracking-widest whitespace-nowrap transition-colors duration-300 absolute top-3 md:top-4 ${isHovered ? 'text-white' : 'text-[#555555]'}`}>
-                {proj.name}
-              </span>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                className="flex flex-col items-center justify-center"
+              >
+                <div className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border mb-2 transition-colors duration-300 ${isHovered ? 'bg-[#E10613] border-[#E10613] shadow-[0_0_10px_2px_rgba(225,6,19,0.5)]' : 'bg-[#050505] border-[#555555]'}`} />
+                <span className={`text-[8px] md:text-[10px] uppercase font-mono tracking-widest whitespace-nowrap transition-colors duration-300 absolute top-3 md:top-4 ${isHovered ? 'text-white' : 'text-[#555555]'}`}>
+                  {proj.name}
+                </span>
+              </motion.div>
+            </div>
           );
         })}
       </div>

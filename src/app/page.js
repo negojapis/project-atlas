@@ -28,26 +28,17 @@ export default function Home() {
       {/* Cinematic Loader */}
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
 
-      {/* Main Content */}
-      <AnimatePresence>
-        {!isLoading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="flex flex-col"
-          >
-            <Hero />
-            <Manifesto />
-            <About />
-            <MastimCore />
-            <Ecosystem />
-            <Timeline />
-            <Philosophy />
-            <Footer />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Main Content ALWAYS rendered so Lenis can calculate height */}
+      <div className="flex flex-col">
+        <Hero />
+        <Manifesto />
+        <About />
+        <MastimCore />
+        <Ecosystem />
+        <Timeline />
+        <Philosophy />
+        <Footer />
+      </div>
     </main>
   );
 }
