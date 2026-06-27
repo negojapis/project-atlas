@@ -16,22 +16,8 @@ import { useLenis } from "lenis/react";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const lenis = useLenis();
 
-  // Stop Lenis scroll while loading
-  useEffect(() => {
-    if (lenis) {
-      if (isLoading) {
-        lenis.stop();
-      } else {
-        lenis.start();
-      }
-    }
-  }, [lenis, isLoading]);
-
-  useEffect(() => {
-    // Rely only on Lenis for scroll locking, remove body manipulation to avoid getting stuck
-  }, [isLoading]);
+  // Removido o bloqueio forçado do Lenis para garantir que o scroll nunca quebre.
 
   return (
     <main className="relative bg-[#050505] text-white selection:bg-[#E10613] selection:text-white">
