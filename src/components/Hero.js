@@ -2,24 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { DottedSurface } from "@/components/ui/dotted-surface";
 
 export default function Hero() {
   return (
     <section className="relative min-h-[100vh] flex flex-col items-center justify-end overflow-hidden bg-[#050505] px-6 pb-24 md:pb-32">
       
-      {/* High Quality Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src="/fundo-papel.jpg.png" 
-          alt="Mastim Background" 
-          fill 
-          quality={100}
-          priority
-          className="object-cover object-center opacity-30 grayscale" 
-        />
-        {/* Gradient overlay to ensure text legibility and blend with the next section */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505]" />
-      </div>
+      <DottedSurface className="w-full h-full opacity-60" />
 
       {/* Background Layers (Subtle) */}
       <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
