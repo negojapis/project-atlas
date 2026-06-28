@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -14,6 +15,13 @@ export default function About() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="relative h-[400px] md:h-[600px] w-full border border-[#252525] rounded-3xl overflow-hidden bg-[#090909] group"
         >
+          {/* Photo */}
+          <Image
+            src="/img/foto.png"
+            alt="Felipe Gonçalves - Mastim"
+            fill
+            className="object-cover object-center z-0 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"
+          />
           {/* Inner Grid */}
           <div className="absolute inset-0 bg-grid opacity-20 group-hover:opacity-40 transition-opacity duration-1000" />
           
