@@ -17,7 +17,7 @@ export default function About() {
         >
           {/* Photo */}
           <Image
-            src="/img/foto.png"
+            src="/foto.jpeg"
             alt="Felipe Gonçalves - Mastim"
             fill
             className="object-cover object-center z-0 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"
