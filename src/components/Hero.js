@@ -7,6 +7,20 @@ export default function Hero() {
   return (
     <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-[#050505] px-6">
       
+      {/* High Quality Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/foto.2.png" 
+          alt="Mastim Background" 
+          fill 
+          quality={100}
+          priority
+          className="object-cover object-center opacity-30 grayscale" 
+        />
+        {/* Gradient overlay to ensure text legibility and blend with the next section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505]" />
+      </div>
+
       {/* Background Layers (Subtle) */}
       <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
         {/* Core Glow Breathing */}
