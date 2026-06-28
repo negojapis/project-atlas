@@ -72,6 +72,8 @@ export function DottedSurface({ className, ...props }) {
 
 		// Create points object
 		const points = new THREE.Points(geometry, material);
+		points.rotation.x = 0.35; // Tilt the plane up to fill the background
+		points.position.y = -150; // Adjust height to keep it centered
 		scene.add(points);
 
 		let count = 0;
