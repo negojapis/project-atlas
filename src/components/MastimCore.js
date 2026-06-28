@@ -41,27 +41,7 @@ export default function MastimCore() {
   };
 
   return (
-    <section id="core" className="relative w-full flex flex-col items-center justify-center py-20 px-6 bg-[#050505] overflow-hidden">
-      
-      {/* High Quality Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src="/fundo-papel.jpg.png" 
-          alt="Mastim Background" 
-          fill 
-          quality={100}
-          className="object-cover object-center opacity-30 grayscale" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#050505]/50 to-[#050505]" />
-      </div>
-      <div className="mb-16 md:mb-24 text-center z-20">
-        <h2 className={`text-white text-3xl md:text-5xl flex items-center justify-center gap-6 mb-6 ${greatVibes.className}`}>
-          <span className="w-12 md:w-24 h-[2px] bg-[#E10613]" />
-          Mastim Core
-          <span className="w-12 md:w-24 h-[2px] bg-[#E10613]" />
-        </h2>
-        <p className="text-[#777777] text-sm md:text-lg font-mono uppercase tracking-[0.3em]">Núcleo do Ecossistema</p>
-      </div>
+    <section id="core" className="relative w-full flex flex-col items-center justify-center py-20 px-6 bg-transparent overflow-hidden">
 
       <div className="relative w-full max-w-[1000px] h-[500px] md:h-[800px] flex items-center justify-center">
         

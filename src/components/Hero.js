@@ -6,29 +6,9 @@ import { DottedSurface } from "@/components/ui/dotted-surface";
 
 export default function Hero() {
   return (
-    <section className="relative w-full bg-[#050505]">
-      
-      {/* Sticky Background */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden z-0">
-        <DottedSurface className="w-full h-full opacity-60" />
-        
-        {/* Core Glow Breathing */}
-        <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
-          <motion.div
-            animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.03, 0.05, 0.03],
-            }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute w-[50vw] h-[50vw] max-w-[500px] max-h-[500px] bg-[#E10613] rounded-full blur-[120px]"
-          />
-        </div>
-        
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/20 to-[#050505]" />
-      </div>
-
+    <section className="relative w-full bg-transparent">
       {/* Scrolling Content */}
-      <div className="relative z-10 -mt-[100vh]">
+      <div className="relative z-10">
         
         {/* Opening Screen */}
         <div className="min-h-screen flex flex-col items-center justify-center px-6">

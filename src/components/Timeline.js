@@ -38,18 +38,7 @@ const timelineData = [
 
 export default function Timeline() {
   return (
-    <section id="timeline" className="relative py-32 px-6 bg-[#050505] overflow-hidden">
-      {/* High Quality Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src="/fundo-papel.jpg.png" 
-          alt="Mastim Background" 
-          fill 
-          quality={100}
-          className="object-cover object-center opacity-30 grayscale" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#050505]/50 to-[#050505]" />
-      </div>
+    <section id="timeline" className="relative py-32 px-6 bg-transparent overflow-hidden">
 
       <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
         <div className="mb-32 text-center">

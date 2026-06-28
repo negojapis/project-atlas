@@ -11,6 +11,7 @@ import MastimCore from "@/components/MastimCore";
 import Timeline from "@/components/Timeline";
 import Footer from "@/components/Footer";
 import { useLenis } from "lenis/react";
+import { DottedSurface } from "@/components/ui/dotted-surface";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +19,18 @@ export default function Home() {
   // Removido o bloqueio forçado do Lenis para garantir que o scroll nunca quebre.
 
   return (
-    <main className="relative bg-[#050505] text-white selection:bg-[#E10613] selection:text-white">
+    <main className="relative min-h-screen bg-[#050505] text-white selection:bg-[#E10613] selection:text-white font-sans overflow-x-hidden">
+      
+      {/* Global Fixed Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <DottedSurface className="w-full h-full opacity-60" />
+        
+        {/* Core Glow Breathing globally */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center mix-blend-screen">
+          <div className="w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-[#E10613] rounded-full blur-[150px] opacity-[0.03] animate-pulse" />
+        </div>
+      </div>
+
       {/* Backgrounds */}
       <LivingGrid />
       <NoiseOverlay />
@@ -27,7 +39,7 @@ export default function Home() {
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
 
       {/* Main Content ALWAYS rendered so Lenis can calculate height */}
-      <div className="flex flex-col">
+      <div className="relative z-10 flex flex-col">
         <Hero />
         <MastimCore />
         <Ecosystem />

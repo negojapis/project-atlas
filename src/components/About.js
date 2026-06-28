@@ -12,18 +12,7 @@ const greatVibes = Great_Vibes({
 
 export default function About() {
   return (
-    <section className="relative min-h-screen flex items-center py-20 px-6 bg-[#050505] overflow-hidden">
-      {/* High Quality Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src="/fundo-papel.jpg.png" 
-          alt="Mastim Background" 
-          fill 
-          quality={100}
-          className="object-cover object-center opacity-30 grayscale" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#050505]/50 to-[#050505]" />
-      </div>
+    <section className="relative min-h-screen flex items-center py-20 px-6 bg-transparent overflow-hidden">
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
         {/* Abstract Tech Element */}
