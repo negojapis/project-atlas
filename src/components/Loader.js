@@ -43,31 +43,6 @@ export default function Loader({ onComplete }) {
         >
           <div className="flex flex-col items-center justify-center w-full max-w-3xl px-6 relative h-[60vh]">
             
-            {/* Core Mark */}
-            <AnimatePresence>
-              {(phase === "mark" || phase === "text" || phase === "signature") && (
-                <motion.div
-                  key="core-mark"
-                  initial={{ opacity: 0 }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: phase === "signature" ? [1, 1.02, 1] : 1 
-                  }}
-                  transition={{ 
-                    opacity: { duration: 1, ease: "easeInOut" },
-                    scale: { duration: 0.8, ease: "easeInOut", repeat: Infinity } // Breathing in signature phase
-                  }}
-                  className="absolute top-0 flex items-center justify-center h-24 md:h-32 lg:h-40"
-                >
-                  <img
-                    src="/foto.3.png"
-                    alt="Mastim Core"
-                    className="w-auto h-full object-contain opacity-80"
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-
             {/* Verse */}
             <AnimatePresence>
               {phase === "text" && (
@@ -77,12 +52,12 @@ export default function Loader({ onComplete }) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 1, ease: "easeInOut" }} // Fade = contemplação
-                  className="absolute top-40 flex flex-col items-center text-center space-y-6 w-full"
+                  className="flex flex-col items-center justify-center text-center space-y-8 w-full h-full"
                 >
-                  <p className="text-white text-lg md:text-xl lg:text-2xl font-serif font-light leading-relaxed tracking-wide opacity-90 w-full max-w-4xl px-4">
+                  <p className="text-white text-2xl md:text-4xl lg:text-5xl font-serif font-light leading-relaxed tracking-wide opacity-90 w-full max-w-5xl px-6">
                     "Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu."
                   </p>
-                  <span className="text-[#666666] text-xs md:text-sm font-sans font-light tracking-[0.2em] uppercase">
+                  <span className="text-[#666666] text-sm md:text-base font-sans font-light tracking-[0.3em] uppercase">
                     — Eclesiastes 3:1
                   </span>
                 </motion.div>
