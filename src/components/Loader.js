@@ -57,12 +57,12 @@ export default function Loader({ onComplete }) {
                     opacity: { duration: 1, ease: "easeInOut" },
                     scale: { duration: 0.8, ease: "easeInOut", repeat: Infinity } // Breathing in signature phase
                   }}
-                  className="absolute top-0 flex items-center justify-center w-24 h-24"
+                  className="absolute top-0 flex items-center justify-center h-16 md:h-20"
                 >
                   <img
                     src="/foto.3.png"
                     alt="Mastim Core"
-                    className="w-full h-full object-contain opacity-80"
+                    className="w-auto h-full object-contain opacity-80"
                   />
                 </motion.div>
               )}
@@ -79,9 +79,8 @@ export default function Loader({ onComplete }) {
                   transition={{ duration: 1, ease: "easeInOut" }} // Fade = contemplação
                   className="absolute top-40 flex flex-col items-center text-center space-y-6 w-full"
                 >
-                  <p className="text-white text-lg md:text-xl lg:text-2xl font-serif font-light leading-relaxed tracking-wide opacity-90 max-w-lg">
-                    "Tudo tem o seu tempo determinado,<br/>
-                    e há tempo para todo propósito debaixo do céu."
+                  <p className="text-white text-lg md:text-xl lg:text-2xl font-serif font-light leading-relaxed tracking-wide opacity-90 w-full max-w-4xl px-4">
+                    "Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu."
                   </p>
                   <span className="text-[#666666] text-xs md:text-sm font-sans font-light tracking-[0.2em] uppercase">
                     — Eclesiastes 3:1
