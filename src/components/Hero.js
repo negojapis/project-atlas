@@ -10,7 +10,7 @@ export default function Hero() {
       {/* High Quality Background Image */}
       <div className="absolute inset-0 z-0">
         <Image 
-          src="/fundo-papel.jpg" 
+          src="/fundo-papel.jpg.png" 
           alt="Mastim Background" 
           fill 
           quality={100}
