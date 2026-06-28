@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 export default function About() {
   return (
@@ -13,45 +14,17 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="relative h-[400px] md:h-[600px] w-full border border-[#252525] rounded-3xl overflow-hidden bg-[#090909] group"
+          className="w-full h-[400px] md:h-[600px] group"
         >
-          {/* Photo */}
-          <Image
-            src="/foto.jpeg"
-            alt="Felipe Gonçalves - Mastim"
-            fill
-            className="object-cover object-center z-0 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"
-          />
-          {/* Inner Grid */}
-          <div className="absolute inset-0 bg-grid opacity-20 group-hover:opacity-40 transition-opacity duration-1000" />
-          
-          {/* Animated lines */}
-          <div className="absolute inset-0 flex flex-col justify-between py-12">
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, delay: i * 0.2, ease: "easeInOut" }}
-                className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#252525] to-transparent origin-left"
-              />
-            ))}
-          </div>
-
-          {/* Glowing orb */}
-          <motion.div
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.5, 0.8, 0.5]
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#E10613] rounded-full blur-[80px] opacity-20"
-          />
-
-          {/* Decorative Corner accents */}
-          <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-[#A6A6A6] opacity-30 rounded-tl-3xl" />
-          <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-[#A6A6A6] opacity-30 rounded-br-3xl" />
+          <GlowCard customSize glowColor="red" className="w-full h-full bg-[#090909] border-none">
+            {/* Photo */}
+            <Image
+              src="/foto.jpeg"
+              alt="Felipe Gonçalves - Mastim"
+              fill
+              className="object-cover object-center z-0 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-in-out mix-blend-lighten"
+            />
+          </GlowCard>
         </motion.div>
 
         {/* Text Content */}
