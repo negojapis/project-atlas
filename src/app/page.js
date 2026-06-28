@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import MastimCore from "@/components/MastimCore";
@@ -15,7 +14,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <main className="relative min-h-screen bg-[#050505] text-white selection:bg-[#E10613] selection:text-white font-sans overflow-x-hidden">
+    <main className="relative min-h-screen bg-[#050505] text-white selection:bg-[#E10613] selection:text-white font-sans overflow-x-hidden pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
       
       {/* Global Atmosphere (Identity before technology) */}
       <Atmosphere />
@@ -25,6 +24,10 @@ export default function Home() {
 
       <div className="relative z-10 flex flex-col">
         <Hero />
+        
+        {/* Chapter Transition (Respiro intencional) */}
+        <div className="w-full h-[15vh] pointer-events-none" />
+        
         <MastimCore />
         <Manifesto />
         <Timeline />

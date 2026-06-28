@@ -5,11 +5,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const projects = [
-  { name: "Grace Code", angle: -90, dur: "0.2s", ease: "linear" },
-  { name: "Divine Brew", angle: -18, dur: "0.5s", ease: "ease-in-out" },
-  { name: "Mastimverse", angle: 54, dur: "0.3s", ease: "cubic-bezier(0.175, 0.885, 0.32, 1.275)" },
-  { name: "Scripts", angle: 126, dur: "0.15s", ease: "linear" },
-  { name: "YouTube", angle: 198, dur: "0.7s", ease: "ease-out" },
+  { name: "Grace Code", angle: -90, dur: "0.2s", ease: "linear", desc: "Engenharia de alta escala.", action: "Conhecer Grace Code" },
+  { name: "Divine Brew", angle: -18, dur: "0.5s", ease: "ease-in-out", desc: "A pureza da extração.", action: "Visitar Divine Brew" },
+  { name: "Mastimverse", angle: 54, dur: "0.3s", ease: "cubic-bezier(0.175, 0.885, 0.32, 1.275)", desc: "Comunidade e aprendizado.", action: "Entrar no Discord" },
+  { name: "Scripts", angle: 126, dur: "0.15s", ease: "linear", desc: "Ferramentas táticas.", action: "Acessar Scripts" },
+  { name: "YouTube", angle: 198, dur: "0.7s", ease: "ease-out", desc: "Documentando a jornada.", action: "Assistir Vídeos" },
 ];
 
 export default function MastimCore() {
@@ -23,7 +23,7 @@ export default function MastimCore() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const baseDistance = isMobile ? 150 : 350;
+  const baseDistance = isMobile ? 180 : 350;
 
   const getPosition = (angle, distance) => {
     const rad = (angle * Math.PI) / 180;
@@ -46,7 +46,7 @@ export default function MastimCore() {
   return (
     <section id="core" className="relative w-full flex flex-col items-center justify-center py-40 px-6 bg-transparent overflow-hidden">
 
-      <div className="relative w-full max-w-[1200px] h-[600px] md:h-[900px] flex items-center justify-center">
+      <div className="relative w-full max-w-[1200px] h-[700px] md:h-[900px] flex items-center justify-center">
         
         {/* Constellation Connections */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="-600 -600 1200 1200">
@@ -115,8 +115,9 @@ export default function MastimCore() {
                 top: '50%',
                 transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px))` 
               }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => setHoveredIndex(isHovered ? null : i)}
+              onMouseEnter={() => !isMobile && setHoveredIndex(i)}
+              onMouseLeave={() => !isMobile && setHoveredIndex(null)}
             >
               {/* Nascer da mesma origem */}
               <motion.div
@@ -151,6 +152,21 @@ export default function MastimCore() {
                 }`} style={{ transition: projectTransition }}>
                   {proj.name}
                 </span>
+
+                {/* Entity Description (Revealed after Title) */}
+                <span className={`absolute top-14 md:top-16 text-[#888888] text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] whitespace-nowrap pointer-events-none ${
+                  isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+                }`} style={{ transition: isHovered ? `all 0.4s ease-out 0.4s` : `all 0.2s ease-in-out 0s` }}>
+                  {proj.desc}
+                </span>
+                
+                {/* Action Command (Revealed after Description) */}
+                <a href="#" className={`absolute top-24 md:top-28 text-[#555] md:hover:text-white active:scale-95 active:text-white text-[10px] uppercase font-mono tracking-[0.3em] flex items-center gap-2 p-4 -m-4 ${
+                  isHovered ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'
+                }`} style={{ transition: isHovered ? `all 0.4s ease-out 0.8s` : `all 0.2s ease-in-out 0s` }}>
+                  <span className="opacity-40">→</span>
+                  {proj.action}
+                </a>
 
               </motion.div>
             </div>

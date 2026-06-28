@@ -7,14 +7,14 @@ export default function About() {
   return (
     <section className="relative min-h-screen flex items-center py-32 px-6 bg-transparent overflow-hidden">
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
         {/* Abstract Editorial Photo */}
         <motion.div
           initial={{ opacity: 0, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="w-full h-[500px] md:h-[700px] relative group"
+          className="w-full h-[600px] md:h-[800px] relative group"
         >
           <div className="absolute inset-0 border border-[#222222] z-10 pointer-events-none transition-colors duration-700 group-hover:border-[#555555]" />
           <Image
@@ -24,7 +24,7 @@ export default function About() {
             className="object-cover object-center z-0 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out mix-blend-lighten"
           />
           {/* Technical mark */}
-          <div className="absolute bottom-4 left-4 font-mono text-[9px] text-[#555555] tracking-[0.3em] uppercase z-20">
+          <div className="absolute bottom-6 left-6 font-mono text-[9px] text-[#555555] tracking-[0.3em] uppercase z-20">
             [ ID: F.GONCALVES ]
           </div>
         </motion.div>
@@ -47,7 +47,7 @@ export default function About() {
           </p>
 
           <p className="text-[#888888] text-lg md:text-xl font-serif font-light leading-relaxed max-w-xl">
-            Minha trajetória começou pela curiosidade e evoluiu para tecnologia, marcas, comunidade e construção de experiências digitais.
+            A curiosidade constrói tecnologia. A identidade constrói legados.
           </p>
         </motion.div>
       </div>

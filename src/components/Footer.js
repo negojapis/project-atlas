@@ -19,14 +19,17 @@ export default function Footer() {
   const scrollToTop = () => {
     if (lenis) {
       lenis.scrollTo(0, { duration: 2, ease: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   return (
-    <footer className="relative pt-32 pb-12 px-6 overflow-hidden bg-transparent">
-      <div className="max-w-7xl mx-auto">
+    <footer className="relative pt-32 pb-[env(safe-area-inset-bottom)] px-6 overflow-hidden bg-transparent">
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
+        
         {/* Quick Links */}
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-40">
+        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-40 w-full">
           {quickLinks.map((link, index) => (
             <motion.a
               key={index}
@@ -37,15 +40,15 @@ export default function Footer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-              className="text-[#666666] text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] hover:text-white transition-colors duration-500"
+              className="text-[#666666] text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] md:hover:text-white active:scale-95 active:text-white transition-all duration-300 p-2"
             >
               [ {link.name} ]
             </motion.a>
           ))}
         </div>
 
-        {/* Footer Bottom / Next Chapter */}
-        <div className="flex flex-col items-center text-center space-y-24">
+        {/* Footer Bottom / Next Chapter (Epílogo) */}
+        <div className="flex flex-col items-center text-center space-y-24 w-full">
           
           <motion.div
             initial={{ opacity: 0, filter: "blur(10px)" }}
@@ -66,24 +69,35 @@ export default function Footer() {
             <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif font-light text-[#333333] tracking-wide leading-tight pt-8">
               Construo o Universo Mastim.
             </h2>
+
+            <motion.h3 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, delay: 1, ease: "easeOut" }}
+              className="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.5em] text-[#555555] pt-24"
+            >
+              O futuro continua sendo construído.
+            </motion.h3>
           </motion.div>
 
+          {/* Fim do Livro / Restart */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="pt-16 border-t border-[#111111] w-full max-w-2xl flex flex-col items-center"
+            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+            className="pt-16 pb-8 border-t border-[#111111] w-full max-w-2xl flex flex-col items-center"
           >
-            <p className="text-[#444444] uppercase tracking-[0.4em] font-mono text-[9px] mb-8">
-              MASTIM // EXPERIENCE — 2026
+            <p className="text-[#333333] uppercase tracking-[0.5em] font-mono text-[9px] mb-8">
+              MASTIM // EPILOGUE — 2026
             </p>
             <button
               onClick={scrollToTop}
-              className="group flex flex-col items-center gap-4 text-[#555555] hover:text-white transition-colors duration-500"
+              className="group flex flex-col items-center gap-4 text-[#444444] md:hover:text-white active:scale-90 active:text-white transition-all duration-500 p-4"
             >
-              <div className="w-10 h-10 rounded-full border border-[#222222] flex items-center justify-center group-hover:border-white transition-colors duration-500">
-                <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform duration-500" />
+              <div className="w-12 h-12 rounded-full border border-[#111111] flex items-center justify-center md:group-hover:border-[#333333] group-active:border-[#555555] transition-colors duration-500">
+                <ArrowUp className="w-3 h-3 opacity-50 md:group-hover:opacity-100 md:group-hover:-translate-y-1 group-active:translate-y-0 transition-all duration-500" />
               </div>
             </button>
           </motion.div>
