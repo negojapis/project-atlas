@@ -6,7 +6,7 @@ import { DottedSurface } from "@/components/ui/dotted-surface";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100vh] flex flex-col items-center justify-end overflow-hidden bg-[#050505] px-6 pb-24 md:pb-32">
+    <section className="relative min-h-[100vh] flex flex-col items-center justify-center overflow-hidden bg-[#050505] px-6">
       
       <DottedSurface className="w-full h-full opacity-60" />
 
