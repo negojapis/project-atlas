@@ -16,7 +16,7 @@ export function DottedSurface({ className, ...props }) {
 
 		// Scene setup
 		const scene = new THREE.Scene();
-		scene.fog = new THREE.Fog(0xffffff, 2000, 10000);
+		scene.fog = new THREE.Fog(0x000000, 1000, 6000); // Black fog to blend with background
 
 		const camera = new THREE.PerspectiveCamera(
 			60,
@@ -24,7 +24,9 @@ export function DottedSurface({ className, ...props }) {
 			1,
 			10000,
 		);
-		camera.position.set(0, 355, 1220);
+		// Elevate camera and look down to fill the screen with the grid
+		camera.position.set(0, 1200, 1000);
+		camera.lookAt(0, -200, -1000);
 
 		const renderer = new THREE.WebGLRenderer({
 			alpha: true,
@@ -72,8 +74,6 @@ export function DottedSurface({ className, ...props }) {
 
 		// Create points object
 		const points = new THREE.Points(geometry, material);
-		points.rotation.x = 0.35; // Tilt the plane up to fill the background
-		points.position.y = -150; // Adjust height to keep it centered
 		scene.add(points);
 
 		let count = 0;
