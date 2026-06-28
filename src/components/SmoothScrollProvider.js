@@ -4,7 +4,13 @@ import { ReactLenis } from "lenis/react";
 
 export default function SmoothScrollProvider({ children }) {
   return (
-    <ReactLenis root options={{ lerp: 0.08, duration: 1.5, smoothWheel: true }}>
+    <ReactLenis root options={{ 
+      lerp: 0.08, 
+      duration: 1.5, 
+      smoothWheel: true,
+      smoothTouch: false, // Força a física nativa no mobile
+      syncTouch: false
+    }}>
       {children}
     </ReactLenis>
   );
