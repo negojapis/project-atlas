@@ -3,12 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Great_Vibes } from "next/font/google";
-
-const greatVibes = Great_Vibes({ 
-  subsets: ["latin"], 
-  weight: "400" 
-});
 
 const projects = [
   { name: "Grace Code", angle: -90 },
@@ -29,7 +23,6 @@ export default function MastimCore() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Responsive distance
   const baseDistance = isMobile ? 140 : 300;
 
   const getPosition = (angle, distance) => {
@@ -41,11 +34,11 @@ export default function MastimCore() {
   };
 
   return (
-    <section id="core" className="relative w-full flex flex-col items-center justify-center py-20 px-6 bg-transparent overflow-hidden">
+    <section id="core" className="relative w-full flex flex-col items-center justify-center py-32 px-6 bg-transparent overflow-hidden">
 
       <div className="relative w-full max-w-[1000px] h-[500px] md:h-[800px] flex items-center justify-center">
         
-        {/* SVG Neural Connections */}
+        {/* Constellation Connections (Hidden by default, revealed on hover) */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="-500 -500 1000 1000">
           {projects.map((proj, i) => {
             const pos = getPosition(proj.angle, baseDistance);
@@ -57,42 +50,32 @@ export default function MastimCore() {
                   y1="0"
                   x2={pos.x}
                   y2={pos.y}
-                  stroke={isHovered ? "#E10613" : "#222"}
-                  strokeWidth={isHovered ? "1" : "0.5"}
-                  className="transition-all duration-700"
+                  stroke="#E10613"
+                  strokeWidth="1"
+                  strokeOpacity={isHovered ? 0.6 : 0}
+                  className="transition-all duration-700 ease-in-out"
                 />
-                {/* Slow pulse dots along the line */}
-                <circle r="1.5" fill={isHovered ? "#E10613" : "#555"} className="transition-all duration-700 opacity-50">
-                  <animateMotion
-                    dur={isHovered ? "2s" : "4s"}
-                    repeatCount="indefinite"
-                    path={`M 0 0 L ${pos.x} ${pos.y}`}
-                  />
-                </circle>
               </g>
             );
           })}
         </svg>
 
-        {/* Central Node (Core Mark) */}
+        {/* Central Observatory (Core Mark) */}
         <div className="absolute z-10 flex flex-col items-center justify-center">
-          <div className="relative w-24 h-24 md:w-40 md:h-40 rounded-full flex items-center justify-center mb-4">
-            <motion.div
-              animate={{ scale: [1, 1.05, 1], opacity: [0.1, 0.2, 0.1] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 bg-[#E10613] rounded-full blur-[20px] md:blur-[40px]"
-            />
+          <div className={`relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center mb-6 transition-transform duration-700 ${hoveredIndex !== null ? 'scale-105' : 'scale-100'}`}>
             <Image
               src="/foto.3.png"
               alt="Mastim Core"
               fill
-              className="object-contain drop-shadow-[0_0_15px_rgba(225,6,19,0.3)] z-10 p-2"
+              className="object-contain z-10"
             />
           </div>
-          <span className="text-[#A6A6A6] text-[10px] md:text-xs uppercase font-mono tracking-[0.4em] z-10">Mastim</span>
+          <span className="text-[#333333] text-[9px] md:text-[10px] uppercase font-sans font-light tracking-[0.5em] z-10 transition-colors duration-700">
+            {hoveredIndex !== null ? 'System Active' : 'Mastim'}
+          </span>
         </div>
 
-        {/* Orbiting Project Nodes */}
+        {/* Orbiting Bodies */}
         {projects.map((proj, i) => {
           const pos = getPosition(proj.angle, baseDistance);
           const isHovered = hoveredIndex === i;
@@ -110,14 +93,22 @@ export default function MastimCore() {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.8 }}
+                transition={{ delay: i * 0.1, duration: 1, ease: "easeOut" }} // Slide = Discovery
                 className="flex flex-col items-center justify-center"
               >
-                <div className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full mb-4 transition-all duration-500 ${isHovered ? 'bg-[#E10613] shadow-[0_0_12px_2px_rgba(225,6,19,0.8)] scale-150' : 'bg-[#333] border border-[#111]'}`} />
-                <span className={`text-[10px] md:text-[11px] uppercase font-mono tracking-[0.2em] whitespace-nowrap transition-colors duration-500 absolute top-5 md:top-6 ${isHovered ? 'text-white' : 'text-[#555]'}`}>
+                {/* O corpo celeste */}
+                <div className={`w-1.5 h-1.5 md:w-2 md:h-2 mb-4 transition-all duration-700 ease-in-out ${
+                  isHovered 
+                    ? 'bg-[#E10613] shadow-[0_0_15px_rgba(225,6,19,0.5)] scale-150 rounded-sm' 
+                    : 'bg-[#444444] rounded-full'
+                }`} />
+                {/* A identificação */}
+                <span className={`text-[10px] md:text-xs uppercase font-sans tracking-[0.2em] whitespace-nowrap transition-all duration-700 ease-in-out absolute top-5 md:top-6 ${
+                  isHovered ? 'text-white font-medium' : 'text-[#555555] font-light'
+                }`}>
                   {proj.name}
                 </span>
               </motion.div>

@@ -36,11 +36,17 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.5, ease: "easeOut", delay: 2.5 }}
-              className="flex items-center gap-6 md:gap-12 opacity-80"
+              className="flex items-center gap-8 md:gap-16 opacity-80"
             >
-              <a href="#core" className="text-[#777777] text-xs uppercase font-mono tracking-[0.2em] hover:text-[#E10613] transition-colors duration-300">Explorar Ecossistema</a>
-              <span className="w-1 h-1 bg-[#333333] rounded-full"></span>
-              <a href="https://wa.me/5511940634737" target="_blank" rel="noopener noreferrer" className="text-[#777777] text-xs uppercase font-mono tracking-[0.2em] hover:text-[#E10613] transition-colors duration-300">Entrar em Contato</a>
+              <a href="#core" className="text-[#666666] text-[10px] md:text-xs uppercase font-mono tracking-[0.3em] hover:text-[#E10613] transition-colors duration-500 flex items-center gap-2">
+                <span className="opacity-40">[</span>
+                EXPLORAR
+                <span className="opacity-40">]</span>
+              </a>
+              <a href="https://wa.me/5511940634737" target="_blank" rel="noopener noreferrer" className="text-[#666666] text-[10px] md:text-xs uppercase font-mono tracking-[0.3em] hover:text-white transition-colors duration-500 flex items-center gap-2">
+                <span className="opacity-40">/</span>
+                CONTATO
+              </a>
             </motion.div>
 
           </div>
