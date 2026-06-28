@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Great_Vibes } from "next/font/google";
 
 const greatVibes = Great_Vibes({ 
@@ -33,8 +34,20 @@ const timelineData = [
 
 export default function Timeline() {
   return (
-    <section id="timeline" className="py-24 px-6 bg-[#050505]">
-      <div className="max-w-4xl mx-auto">
+    <section id="timeline" className="relative py-24 px-6 bg-[#050505] overflow-hidden">
+      {/* High Quality Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/fundo-papel.jpg.png" 
+          alt="Mastim Background" 
+          fill 
+          quality={100}
+          className="object-cover object-center opacity-30 grayscale" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#050505]/50 to-[#050505]" />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto">
         <div className="mb-20 md:mb-28">
           <h2 className={`text-white text-3xl md:text-5xl mb-4 ${greatVibes.className}`}>Journey Line</h2>
           <p className="text-[#777777] text-sm md:text-lg font-mono uppercase tracking-[0.3em]">Histórico do Sistema</p>
