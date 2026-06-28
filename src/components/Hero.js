@@ -5,6 +5,7 @@ import Image from "next/image";
 import { DottedSurface } from "@/components/ui/dotted-surface";
 
 export default function Hero() {
+  return (
     <section className="relative w-full bg-[#050505]">
       
       {/* Sticky Background */}
