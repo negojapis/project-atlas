@@ -12,7 +12,7 @@ export default function Manifesto() {
   ];
 
   return (
-    <section id="manifesto" className="relative w-full py-32 bg-transparent overflow-hidden">
+    <section id="manifesto" className="relative w-full py-32 md:py-48 bg-transparent overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center justify-center w-full">
         
         {words.map((word, i) => (

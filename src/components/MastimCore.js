@@ -44,7 +44,7 @@ export default function MastimCore() {
   const isHoveringAny = hoveredIndex !== null;
 
   return (
-    <section id="core" className="relative w-full flex flex-col items-center justify-center py-40 px-6 bg-transparent overflow-hidden">
+    <section id="core" className="relative w-full flex flex-col items-center justify-center py-32 md:py-48 px-6 bg-transparent overflow-hidden">
 
       <div className="relative w-full max-w-[1200px] h-[700px] md:h-[900px] flex items-center justify-center">
         

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <section className="relative min-h-screen flex items-center py-32 px-6 bg-transparent overflow-hidden">
+    <section className="relative min-h-screen flex items-center py-32 md:py-48 px-6 bg-transparent overflow-hidden">
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
         {/* Abstract Editorial Photo */}
