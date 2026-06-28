@@ -38,12 +38,12 @@ export default function MastimCore() {
     <section id="core" className="relative w-full flex flex-col items-center justify-center py-20 px-6 bg-[#050505] overflow-hidden">
       
       <div className="mb-16 md:mb-24 text-center z-20">
-        <h2 className="text-[#A6A6A6] uppercase tracking-widest text-sm font-mono flex items-center justify-center gap-4 mb-4">
-          <span className="w-8 h-[1px] bg-[#E10613]" />
+        <h2 className="text-white uppercase tracking-widest text-xl md:text-3xl font-mono font-medium flex items-center justify-center gap-6 mb-6">
+          <span className="w-12 md:w-24 h-[2px] bg-[#E10613]" />
           Mastim Core
-          <span className="w-8 h-[1px] bg-[#E10613]" />
+          <span className="w-12 md:w-24 h-[2px] bg-[#E10613]" />
         </h2>
-        <p className="text-[#555555] text-xs font-mono uppercase tracking-[0.2em]">Núcleo do Ecossistema</p>
+        <p className="text-[#777777] text-sm md:text-lg font-mono uppercase tracking-[0.3em]">Núcleo do Ecossistema</p>
       </div>
 
       <div className="relative w-full max-w-[1000px] h-[400px] md:h-[800px] flex items-center justify-center">
