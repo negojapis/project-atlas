@@ -24,11 +24,6 @@ export default function Home() {
       {/* Global Fixed Background */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <DottedSurface className="w-full h-full opacity-60" />
-        
-        {/* Core Glow Breathing globally */}
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center mix-blend-screen">
-          <div className="w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-[#E10613] rounded-full blur-[150px] opacity-[0.03] animate-pulse" />
-        </div>
       </div>
 
       {/* Backgrounds */}
