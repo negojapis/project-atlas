@@ -57,7 +57,7 @@ export default function Loader({ onComplete }) {
                     opacity: { duration: 1, ease: "easeInOut" },
                     scale: { duration: 0.8, ease: "easeInOut", repeat: Infinity } // Breathing in signature phase
                   }}
-                  className="absolute top-0 flex items-center justify-center h-16 md:h-20"
+                  className="absolute top-0 flex items-center justify-center h-24 md:h-32 lg:h-40"
                 >
                   <img
                     src="/foto.3.png"
