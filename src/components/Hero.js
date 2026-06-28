@@ -40,17 +40,6 @@ export default function Hero() {
         transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
         className="z-10 flex flex-col items-center text-center max-w-4xl mt-12"
       >
-        {/* Core Mark Protagonist */}
-        <div className="relative w-32 h-32 md:w-40 md:h-40 mb-12">
-          <Image
-            src="/icon.png"
-            alt="Mastim Core"
-            fill
-            className="object-contain drop-shadow-[0_0_10px_rgba(225,6,19,0.1)]"
-            priority
-          />
-        </div>
-
         {/* Main Text */}
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white tracking-tight mb-6 leading-[1.1]">
           Toda grande construção <br/>começa com curiosidade.
