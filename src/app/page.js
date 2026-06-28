@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LivingGrid, NoiseOverlay } from "@/components/BackgroundElements";
 import Loader from "@/components/Loader";
 import Hero from "@/components/Hero";
-import Manifesto from "@/components/Manifesto";
 import About from "@/components/About";
 import Ecosystem from "@/components/Ecosystem";
 import MastimCore from "@/components/MastimCore";
@@ -30,7 +29,6 @@ export default function Home() {
       {/* Main Content ALWAYS rendered so Lenis can calculate height */}
       <div className="flex flex-col">
         <Hero />
-        <Manifesto />
         <About />
         <MastimCore />
         <Ecosystem />
