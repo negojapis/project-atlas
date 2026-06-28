@@ -10,13 +10,9 @@ export function DottedSurface({ className, ...props }) {
 	useEffect(() => {
 		if (!containerRef.current) return;
 
-		const SEPARATION = 150;
-		const AMOUNTX = 40;
-		const AMOUNTY = 60;
-
 		// Scene setup
 		const scene = new THREE.Scene();
-		scene.fog = new THREE.Fog(0x000000, 1000, 6000); // Black fog to blend with background
+		scene.fog = new THREE.Fog(0x000000, 100, 3000);
 
 		const camera = new THREE.PerspectiveCamera(
 			60,
@@ -24,57 +20,46 @@ export function DottedSurface({ className, ...props }) {
 			1,
 			10000,
 		);
-		// Elevate camera and look down to fill the screen with the grid
-		camera.position.set(0, 1200, 1000);
-		camera.lookAt(0, -200, -1000);
+		camera.position.set(0, 150, 800);
+		camera.lookAt(0, -100, -1000);
 
 		const renderer = new THREE.WebGLRenderer({
 			alpha: true,
 			antialias: true,
 		});
-		renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // optimize performance
 		renderer.setSize(window.innerWidth, window.innerHeight);
-		renderer.setClearColor(scene.fog.color, 0);
+		renderer.setClearColor(0x000000, 0);
 
 		containerRef.current.appendChild(renderer.domElement);
 
-		// Create particles
-		const positions = [];
-		const colors = [];
+		// Create Plane Geometry
+		const geometry = new THREE.PlaneGeometry(6000, 4000, 120, 100);
+		geometry.rotateX(-Math.PI / 2);
 
-		// Create geometry for all particles
-		const geometry = new THREE.BufferGeometry();
-
-		for (let ix = 0; ix < AMOUNTX; ix++) {
-			for (let iy = 0; iy < AMOUNTY; iy++) {
-				const x = ix * SEPARATION - (AMOUNTX * SEPARATION) / 2;
-				const y = 0; // Will be animated
-				const z = iy * SEPARATION - (AMOUNTY * SEPARATION) / 2;
-
-				positions.push(x, y, z);
-                // Hardcode dark mode colors (white/gray)
-                colors.push(0.8, 0.8, 0.8);
-			}
+		// Store original positions for animation
+		const originalPositions = [];
+		const positionAttribute = geometry.attributes.position;
+		for (let i = 0; i < positionAttribute.count; i++) {
+			originalPositions.push(
+				positionAttribute.getX(i),
+				positionAttribute.getY(i),
+				positionAttribute.getZ(i)
+			);
 		}
 
-		geometry.setAttribute(
-			'position',
-			new THREE.Float32BufferAttribute(positions, 3),
-		);
-		geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
 		// Create material
-		const material = new THREE.PointsMaterial({
-			size: 8,
-			vertexColors: true,
+		const material = new THREE.MeshBasicMaterial({
+			color: 0xE10613, // Mastim Red
+			wireframe: true,
 			transparent: true,
-			opacity: 0.8,
-			sizeAttenuation: true,
+			opacity: 0.15,
 		});
 
-		// Create points object
-		const points = new THREE.Points(geometry, material);
-		scene.add(points);
+		// Create mesh
+		const mesh = new THREE.Mesh(geometry, material);
+		mesh.position.y = -200;
+		scene.add(mesh);
 
 		let count = 0;
 		let animationId;
@@ -83,26 +68,26 @@ export function DottedSurface({ className, ...props }) {
 		const animate = () => {
 			animationId = requestAnimationFrame(animate);
 
-			const positionAttribute = geometry.attributes.position;
-			const positionsArray = positionAttribute.array;
+			const positions = geometry.attributes.position;
+			
+			for (let i = 0; i < positions.count; i++) {
+				const x = originalPositions[i * 3];
+				const z = originalPositions[i * 3 + 2];
 
-			let i = 0;
-			for (let ix = 0; ix < AMOUNTX; ix++) {
-				for (let iy = 0; iy < AMOUNTY; iy++) {
-					const index = i * 3;
+				// Valley curve
+				const valley = (x * x) / 3000;
+				
+				// Flowing waves
+				const wave1 = Math.sin(x * 0.002 + count * 0.02) * 50;
+				const wave2 = Math.cos(z * 0.005 + count * 0.02) * 80;
+				const wave3 = Math.sin((x * z) * 0.000001 + count * 0.01) * 30;
 
-					// Animate Y position with sine waves
-					positionsArray[index + 1] =
-						Math.sin((ix + count) * 0.3) * 50 +
-						Math.sin((iy + count) * 0.5) * 50;
-
-					i++;
-				}
+				positions.setY(i, valley + wave1 + wave2 + wave3);
 			}
 
-			positionAttribute.needsUpdate = true;
+			positions.needsUpdate = true;
 			renderer.render(scene, camera);
-			count += 0.1;
+			count += 1;
 		};
 
 		// Handle window resize
@@ -122,9 +107,8 @@ export function DottedSurface({ className, ...props }) {
 			scene,
 			camera,
 			renderer,
-			particles: [points],
+			mesh,
 			animationId,
-			count,
 		};
 
 		// Cleanup function
@@ -134,24 +118,12 @@ export function DottedSurface({ className, ...props }) {
 			if (sceneRef.current) {
 				cancelAnimationFrame(sceneRef.current.animationId);
 
-				// Clean up Three.js objects
-				sceneRef.current.scene.traverse((object) => {
-					if (object instanceof THREE.Points) {
-						object.geometry.dispose();
-						if (Array.isArray(object.material)) {
-							object.material.forEach((material) => material.dispose());
-						} else {
-							object.material.dispose();
-						}
-					}
-				});
-
+				sceneRef.current.mesh.geometry.dispose();
+				sceneRef.current.mesh.material.dispose();
 				sceneRef.current.renderer.dispose();
 
 				if (containerRef.current && sceneRef.current.renderer.domElement) {
-					containerRef.current.removeChild(
-						sceneRef.current.renderer.domElement,
-					);
+					containerRef.current.removeChild(sceneRef.current.renderer.domElement);
 				}
 			}
 		};
