@@ -24,7 +24,7 @@ export default function MastimCore() {
   }, []);
 
   // Responsive distance
-  const baseDistance = isMobile ? 100 : 160;
+  const baseDistance = isMobile ? 140 : 300;
 
   const getPosition = (angle, distance) => {
     const rad = (angle * Math.PI) / 180;
@@ -46,10 +46,10 @@ export default function MastimCore() {
         <p className="text-[#555555] text-xs font-mono uppercase tracking-[0.2em]">Núcleo do Ecossistema</p>
       </div>
 
-      <div className="relative w-full max-w-[400px] md:max-w-[600px] h-[300px] md:h-[500px] flex items-center justify-center">
+      <div className="relative w-full max-w-[1000px] h-[400px] md:h-[800px] flex items-center justify-center">
         
         {/* SVG Neural Connections */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="-300 -300 600 600">
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="-500 -500 1000 1000">
           {projects.map((proj, i) => {
             const pos = getPosition(proj.angle, baseDistance);
             const isHovered = hoveredIndex === i;
@@ -79,18 +79,18 @@ export default function MastimCore() {
         </svg>
 
         {/* Central Node (Core Mark) */}
-        <div className="absolute z-10 w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center">
+        <div className="absolute z-10 w-32 h-32 md:w-48 md:h-48 rounded-full flex items-center justify-center">
           <motion.div
             animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 bg-[#E10613] rounded-full blur-[20px] md:blur-[30px]"
+            className="absolute inset-0 bg-[#E10613] rounded-full blur-[30px] md:blur-[60px]"
           />
           <Image
             src="/icon.png"
             alt="Mastim Core"
-            width={60}
-            height={60}
-            className="object-contain drop-shadow-[0_0_10px_rgba(225,6,19,0.3)] z-10 w-12 h-12 md:w-16 md:h-16"
+            width={120}
+            height={120}
+            className="object-contain drop-shadow-[0_0_20px_rgba(225,6,19,0.5)] z-10 w-20 h-20 md:w-32 md:h-32"
           />
         </div>
 
@@ -118,8 +118,8 @@ export default function MastimCore() {
                 transition={{ delay: i * 0.1, duration: 0.8 }}
                 className="flex flex-col items-center justify-center"
               >
-                <div className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border mb-2 transition-colors duration-300 ${isHovered ? 'bg-[#E10613] border-[#E10613] shadow-[0_0_10px_2px_rgba(225,6,19,0.5)]' : 'bg-[#050505] border-[#555555]'}`} />
-                <span className={`text-[8px] md:text-[10px] uppercase font-mono tracking-widest whitespace-nowrap transition-colors duration-300 absolute top-3 md:top-4 ${isHovered ? 'text-white' : 'text-[#555555]'}`}>
+                <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border mb-3 transition-colors duration-300 ${isHovered ? 'bg-[#E10613] border-[#E10613] shadow-[0_0_15px_3px_rgba(225,6,19,0.6)]' : 'bg-[#050505] border-[#555555]'}`} />
+                <span className={`text-[10px] md:text-xs uppercase font-mono tracking-widest whitespace-nowrap transition-colors duration-300 absolute top-4 md:top-6 ${isHovered ? 'text-white' : 'text-[#777777]'}`}>
                   {proj.name}
                 </span>
               </motion.div>
