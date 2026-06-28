@@ -3,6 +3,12 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { GlowCard } from "@/components/ui/spotlight-card";
+import { Great_Vibes } from "next/font/google";
+
+const greatVibes = Great_Vibes({ 
+  subsets: ["latin"], 
+  weight: "400" 
+});
 
 export default function About() {
   return (
@@ -35,7 +41,7 @@ export default function About() {
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="space-y-8"
         >
-          <h2 className="text-[#A6A6A6] uppercase tracking-widest text-sm font-mono flex items-center gap-4">
+          <h2 className={`text-[#A6A6A6] text-3xl md:text-5xl flex items-center gap-4 ${greatVibes.className}`}>
             <span className="w-8 h-[1px] bg-[#E10613]" />
             Quem é Mastim?
           </h2>
