@@ -29,10 +29,10 @@ export default function Home() {
       {/* Main Content ALWAYS rendered so Lenis can calculate height */}
       <div className="flex flex-col">
         <Hero />
-        <About />
         <MastimCore />
         <Ecosystem />
         <Timeline />
+        <About />
         <Footer />
       </div>
     </main>

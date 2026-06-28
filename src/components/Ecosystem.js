@@ -13,35 +13,35 @@ const greatVibes = Great_Vibes({
 const projects = [
   {
     title: "Grace Code",
-    description: "Automação e engenharia de software focada em escala.",
+    description: "Tecnologia para transformar ideias em experiências digitais.",
     tags: ["TECH", "AUTOMATION", "B2B"],
     link: "#",
     status: "Online"
   },
   {
     title: "Divine Brew",
-    description: "Ecossistema lifestyle e experiências sensoriais.",
+    description: "Café, pausa e presença.",
     tags: ["LIFESTYLE", "BRAND", "D2C"],
     link: "#",
     status: "Online"
   },
   {
     title: "Mastimverse",
-    description: "Ambiente imersivo de conexão e comunidade exclusiva.",
+    description: "Comunidade geek para explorar, descobrir e conectar.",
     tags: ["COMMUNITY", "WEB3", "HUB"],
     link: "#",
     status: "Online"
   },
   {
-    title: "Mastim Scripts",
-    description: "Laboratório de ferramentas e scripts open-source.",
+    title: "Scripts",
+    description: "Ferramentas para otimização e cuidado com máquinas.",
     tags: ["OPEN-SOURCE", "LAB", "DEV"],
     link: "#",
     status: "Active"
   },
   {
     title: "YouTube",
-    description: "Produção documental focada em tecnologia e visão.",
+    description: "Bastidores, tecnologia e construção.",
     tags: ["MEDIA", "DOCS", "CONTENT"],
     link: "#",
     status: "Recording"
@@ -71,13 +71,14 @@ export default function Ecosystem() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.a
+              href={project.link}
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative flex flex-col bg-[#090909] border border-[#1a1a1a] p-6 hover:border-[#E10613]/50 transition-colors duration-500"
+              className="group relative flex flex-col bg-[#090909] border border-[#1a1a1a] p-6 hover:border-[#E10613]/50 transition-colors duration-500 cursor-pointer"
             >
               {/* Top Bar: Status */}
               <div className="flex justify-between items-center mb-8 border-b border-[#1a1a1a] pb-4">
@@ -107,7 +108,7 @@ export default function Ecosystem() {
 
               {/* Hover Overlay Glow */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#E10613]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>

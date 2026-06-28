@@ -53,21 +53,17 @@ export default function About() {
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="space-y-8"
         >
-          <h2 className={`text-[#A6A6A6] text-3xl md:text-5xl flex items-center gap-4 ${greatVibes.className}`}>
+          <h2 className={`text-[#777777] text-3xl md:text-5xl flex items-center gap-4 ${greatVibes.className}`}>
             <span className="w-8 h-[1px] bg-[#E10613]" />
-            Quem é Mastim?
+            Felipe Gonçalves
           </h2>
           
-          <p className="text-2xl md:text-3xl lg:text-4xl text-white font-medium leading-relaxed">
+          <p className="text-2xl md:text-4xl lg:text-5xl text-white font-medium leading-tight">
             Sou Felipe Gonçalves, também conhecido como Mastim.
           </p>
 
-          <p className="text-[#A6A6A6] text-lg leading-relaxed max-w-xl">
-            Minha trajetória começou pela curiosidade: desde 2009 desmontando computadores, rádios, placas, conectores e gabinetes para entender como tudo funcionava.
-          </p>
-          
-          <p className="text-[#A6A6A6] text-lg leading-relaxed max-w-xl">
-            Com o tempo, essa curiosidade se transformou em tecnologia, empreendedorismo, audiovisual, música, IA, marcas e comunidade.
+          <p className="text-[#A6A6A6] text-lg md:text-xl leading-relaxed max-w-xl">
+            Minha trajetória começou pela curiosidade e evoluiu para tecnologia, marcas, comunidade e construção de experiências digitais.
           </p>
         </motion.div>
       </div>

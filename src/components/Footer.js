@@ -45,17 +45,40 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom / Next Chapter */}
-        <div className="flex flex-col items-center text-center space-y-12">
+        <div className="flex flex-col items-center text-center space-y-16">
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="flex flex-col items-center space-y-4"
+          >
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium text-white tracking-tight leading-tight">
+              Não construo apenas projetos.
+            </h2>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium text-[#777] tracking-tight leading-tight">
+              Construo conexões.
+            </h2>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium text-[#444] tracking-tight leading-tight">
+              Construo experiências.
+            </h2>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium text-[#E10613] tracking-tight leading-tight pt-8">
+              Construo o Universo Mastim.
+            </h2>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="pt-16 border-t border-[#1a1a1a] w-full max-w-2xl"
           >
-            <h2 className="text-3xl md:text-5xl font-medium text-white tracking-tight mb-4">
-              O universo continua <br className="md:hidden" />sendo construído.
-            </h2>
-            <p className="text-[#A6A6A6] uppercase tracking-widest font-mono text-sm">
+            <h3 className="text-xl md:text-2xl font-medium text-white tracking-tight mb-4">
+              O universo continua sendo construído.
+            </h3>
+            <p className="text-[#555] uppercase tracking-widest font-mono text-xs">
               MASTIM // EXPERIENCE — 2026
             </p>
           </motion.div>
