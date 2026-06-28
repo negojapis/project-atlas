@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
+import { GLSLHills } from "@/components/glsl-hills";
+
 const words = [
   "Curiosidade.",
   "Construção.",
@@ -39,7 +41,10 @@ export default function Loader({ onComplete }) {
         transition={{ duration: 1, ease: "easeInOut" }}
         className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] overflow-hidden"
       >
-        <div className="flex items-center justify-center h-full w-full">
+        <div className="absolute inset-0 z-0 opacity-40">
+          <GLSLHills />
+        </div>
+        <div className="flex items-center justify-center h-full w-full z-10">
           <AnimatePresence mode="wait">
             {step < words.length && (
               <motion.h2
