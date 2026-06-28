@@ -3,6 +3,12 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Great_Vibes } from "next/font/google";
+
+const greatVibes = Great_Vibes({ 
+  subsets: ["latin"], 
+  weight: "400" 
+});
 
 const projects = [
   { name: "Grace Code", angle: -90 },
@@ -38,7 +44,7 @@ export default function MastimCore() {
     <section id="core" className="relative w-full flex flex-col items-center justify-center py-20 px-6 bg-[#050505] overflow-hidden">
       
       <div className="mb-16 md:mb-24 text-center z-20">
-        <h2 className="text-white uppercase tracking-widest text-xl md:text-3xl font-mono font-medium flex items-center justify-center gap-6 mb-6">
+        <h2 className={`text-white text-3xl md:text-5xl flex items-center justify-center gap-6 mb-6 ${greatVibes.className}`}>
           <span className="w-12 md:w-24 h-[2px] bg-[#E10613]" />
           Mastim Core
           <span className="w-12 md:w-24 h-[2px] bg-[#E10613]" />
