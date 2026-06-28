@@ -1,6 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Great_Vibes } from "next/font/google";
+
+const greatVibes = Great_Vibes({ 
+  subsets: ["latin"], 
+  weight: "400" 
+});
 
 const timelineData = [
   {
@@ -29,9 +35,9 @@ export default function Timeline() {
   return (
     <section id="timeline" className="py-24 px-6 bg-[#050505]">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-20">
-          <h2 className="text-[#A6A6A6] uppercase tracking-widest text-sm font-mono mb-2">Journey Line</h2>
-          <p className="text-[#555555] text-xs font-mono uppercase tracking-[0.2em]">Histórico do Sistema</p>
+        <div className="mb-20 md:mb-28">
+          <h2 className={`text-white text-3xl md:text-5xl mb-4 ${greatVibes.className}`}>Journey Line</h2>
+          <p className="text-[#777777] text-sm md:text-lg font-mono uppercase tracking-[0.3em]">Histórico do Sistema</p>
         </div>
 
         <div className="relative border-l border-[#1a1a1a] ml-4 md:ml-0">

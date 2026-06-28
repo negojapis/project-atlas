@@ -2,6 +2,12 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { Great_Vibes } from "next/font/google";
+
+const greatVibes = Great_Vibes({ 
+  subsets: ["latin"], 
+  weight: "400" 
+});
 
 const projects = [
   {
@@ -45,9 +51,9 @@ export default function Ecosystem() {
   return (
     <section id="ecosystem" className="py-24 px-6 bg-[#050505]">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16">
-          <h2 className="text-[#A6A6A6] uppercase tracking-widest text-sm font-mono mb-2">Modules</h2>
-          <p className="text-[#555555] text-xs font-mono uppercase tracking-[0.2em]">Painel de Controle</p>
+        <div className="mb-16 md:mb-24">
+          <h2 className={`text-white text-3xl md:text-5xl mb-4 ${greatVibes.className}`}>Modules</h2>
+          <p className="text-[#777777] text-sm md:text-lg font-mono uppercase tracking-[0.3em]">Painel de Controle</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
