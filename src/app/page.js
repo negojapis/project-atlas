@@ -8,6 +8,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Ecosystem from "@/components/Ecosystem";
 import MastimCore from "@/components/MastimCore";
+import Manifesto from "@/components/Manifesto";
 import Timeline from "@/components/Timeline";
 import Footer from "@/components/Footer";
 import { useLenis } from "lenis/react";
@@ -33,11 +34,10 @@ export default function Home() {
       {/* Cinematic Loader */}
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
 
-      {/* Main Content ALWAYS rendered so Lenis can calculate height */}
       <div className="relative z-10 flex flex-col">
         <Hero />
         <MastimCore />
-        <Ecosystem />
+        <Manifesto />
         <Timeline />
         <About />
         <Footer />

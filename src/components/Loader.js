@@ -3,66 +3,96 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import { GLSLHills } from "@/components/glsl-hills";
-
-const words = [
-  "Curiosidade.",
-  "Construção.",
-  "Visão.",
-  "Ecossistema.",
-  "Legado."
-];
-
 export default function Loader({ onComplete }) {
-  const [step, setStep] = useState(0);
+  const [phase, setPhase] = useState("silence"); // silence, mark, text, signature, out
 
   useEffect(() => {
-    // Muito mais lento: 2.5s por palavra
-    if (step < words.length) {
-      const timer = setTimeout(() => {
-        setStep(s => s + 1);
-      }, 2500); 
-      return () => clearTimeout(timer);
-    } else {
-      // Após "Legado.", espera mais 3 segundos antes do Hero
-      const timer = setTimeout(() => {
-        onComplete();
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [step, onComplete]);
+    // 0 to 500ms: Silence
+    const t1 = setTimeout(() => setPhase("mark"), 500);
+    
+    // 0.5s to 2.0s: Mark fades in and is contemplated (1.5s total)
+    const t2 = setTimeout(() => setPhase("text"), 2000);
+    
+    // 2.0s to 5.0s: Text fades in and stays (3.0s total)
+    const t3 = setTimeout(() => setPhase("signature"), 5000);
+    
+    // 5.0s to 5.8s: Text fades out, Mark breathes alone (0.8s total)
+    const t4 = setTimeout(() => setPhase("out"), 5800);
+    
+    // 6.5s: Loader completely unmounts (after 0.7s exit transition)
+    const t5 = setTimeout(() => onComplete(), 6500);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
+    };
+  }, [onComplete]);
 
   return (
     <AnimatePresence>
-      <motion.div
-        key="loader"
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1, ease: "easeInOut" }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] overflow-hidden"
-      >
-        <div className="absolute inset-0 z-0 opacity-40">
-          <GLSLHills />
-        </div>
-        <div className="flex items-center justify-center h-full w-full z-10">
-          <AnimatePresence>
-            {step < words.length && (
-              <motion.h2
-                key={step}
-                initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 1.05, filter: "blur(8px)" }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-                className={`text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight absolute ${
-                  step === words.length - 1 ? "text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" : "text-[#A6A6A6]"
-                }`}
-              >
-                {words[step]}
-              </motion.h2>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.div>
+      {phase !== "out" && (
+        <motion.div
+          key="prologue"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] overflow-hidden"
+        >
+          <div className="flex flex-col items-center justify-center w-full max-w-3xl px-6 relative h-[60vh]">
+            
+            {/* Core Mark */}
+            <AnimatePresence>
+              {(phase === "mark" || phase === "text" || phase === "signature") && (
+                <motion.div
+                  key="core-mark"
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: 1, 
+                    scale: phase === "signature" ? [1, 1.02, 1] : 1 
+                  }}
+                  transition={{ 
+                    opacity: { duration: 1, ease: "easeInOut" },
+                    scale: { duration: 0.8, ease: "easeInOut", repeat: Infinity } // Breathing in signature phase
+                  }}
+                  className="absolute top-0 flex items-center justify-center w-24 h-24"
+                >
+                  <img
+                    src="/foto.3.png"
+                    alt="Mastim Core"
+                    className="w-full h-full object-contain opacity-80"
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Verse */}
+            <AnimatePresence>
+              {phase === "text" && (
+                <motion.div
+                  key="verse"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1, ease: "easeInOut" }} // Fade = contemplação
+                  className="absolute top-40 flex flex-col items-center text-center space-y-6 w-full"
+                >
+                  <p className="text-white text-lg md:text-xl lg:text-2xl font-serif font-light leading-relaxed tracking-wide opacity-90 max-w-lg">
+                    "Tudo tem o seu tempo determinado,<br/>
+                    e há tempo para todo propósito debaixo do céu."
+                  </p>
+                  <span className="text-[#666666] text-xs md:text-sm font-sans font-light tracking-[0.2em] uppercase">
+                    — Eclesiastes 3:1
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+          </div>
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 }

@@ -12,40 +12,38 @@ export default function Hero() {
         
         {/* Opening Screen */}
         <div className="min-h-screen flex flex-col items-center justify-center px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-            className="flex flex-col items-center text-center max-w-4xl"
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight mb-16 leading-[1.1]">
-              Toda grande construção <br/>começa com curiosidade.
-            </h1>
+          <div className="flex flex-col items-center text-center max-w-4xl">
             
-            <div className="flex items-center gap-6 md:gap-12 opacity-80">
-              <a href="#core" className="text-[#777777] text-xs uppercase font-mono tracking-[0.2em] hover:text-white transition-colors duration-300">Explorar ecossistema</a>
-              <span className="w-1 h-1 bg-[#333333] rounded-full"></span>
-              <a href="https://wa.me/5511940634737" target="_blank" rel="noopener noreferrer" className="text-[#777777] text-xs uppercase font-mono tracking-[0.2em] hover:text-white transition-colors duration-300">Falar comigo</a>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Manifesto Sequence */}
-        <div className="flex flex-col items-center justify-center w-full pb-32">
-          {["Curiosidade.", "Construção.", "Conexão.", "Ecossistema.", "Legado."].map((word, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, margin: "-30%" }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              className="min-h-[60vh] flex items-center justify-center w-full px-6"
+            <motion.h1 
+              initial={{ opacity: 0, filter: "blur(10px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+              className="text-6xl md:text-8xl lg:text-9xl font-medium text-white tracking-tighter mb-8"
             >
-              <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium text-white tracking-tight">
-                {word}
-              </h2>
+              MASTIM
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut", delay: 1.5 }}
+              className="text-[#A6A6A6] text-lg md:text-2xl font-light leading-relaxed max-w-2xl mb-16"
+            >
+              Construindo um ecossistema onde tecnologia, criatividade e propósito se encontram.
+            </motion.p>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut", delay: 2.5 }}
+              className="flex items-center gap-6 md:gap-12 opacity-80"
+            >
+              <a href="#core" className="text-[#777777] text-xs uppercase font-mono tracking-[0.2em] hover:text-[#E10613] transition-colors duration-300">Explorar Ecossistema</a>
+              <span className="w-1 h-1 bg-[#333333] rounded-full"></span>
+              <a href="https://wa.me/5511940634737" target="_blank" rel="noopener noreferrer" className="text-[#777777] text-xs uppercase font-mono tracking-[0.2em] hover:text-[#E10613] transition-colors duration-300">Entrar em Contato</a>
             </motion.div>
-          ))}
+
+          </div>
         </div>
 
       </div>
