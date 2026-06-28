@@ -45,7 +45,7 @@ export default function Loader({ onComplete }) {
           <GLSLHills />
         </div>
         <div className="flex items-center justify-center h-full w-full z-10">
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             {step < words.length && (
               <motion.h2
                 key={step}
