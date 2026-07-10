@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MASTIM
+**O futuro continua sendo construído.**
 
-## Getting Started
+Mastim Vision é um estúdio criativo focado em desenvolver interfaces, plataformas digitais e experiências de altíssimo padrão e estética luxuosa.
 
-First, run the development server:
+## 🚀 Tecnologias e Stack
+- **Next.js** (React framework - App Router)
+- **Tailwind CSS** (Motor de estilos utility-first para customizações precisas e design responsivo)
+- **Framer Motion** (Orquestração de animações complexas, revelações de scroll e efeitos visuais fluidos)
+- **Lenis** (Smooth scrolling de alta performance, proporcionando navegação editorial e suave)
+- **Lucide React** (Pacote de ícones minimalistas)
+
+## ✨ Destaques do Projeto
+- **Design System Dark/Luxury**: Temática escura intensa (`#000`), micro-bordas (`1px`), hierarquia tipográfica focada em elegância, uso de transparências refinadas.
+- **Hero Cinematográfica**: Animações de entrada orquestradas, título massivo e botão de ação ultra minimalista.
+- **Typewriter Infinito**: Engenharia própria desenvolvida para simular digitação e apagamento humano (loop contínuo) de múltiplas frases em sincronia.
+- **Doca Social (Glassmorphism)**: Componente avançado na base da página com `backdrop-blur`, micro-interações de tooltips orbitais e vetorização 100% otimizada para as redes da Mastim.
+- **Galeria de Projetos**: Grid horizontal ultra refinado exibindo portfólio categorizado por segmento, tecnologias e imagens customizadas do estúdio.
+
+## 📁 Estrutura de Arquivos Principal
+- `src/components/` — Abriga os blocos de seção do site (`Hero.js`, `Projects.js`, `Footer.js`, `About.js`, etc).
+- `src/components/ui/` — Base do Design System, abrigando componentes atômicos reutilizáveis (`HeroTitle.js`, `MicroLabel.js`, `Command.js`, `SocialIcons.js`).
+- `public/` — Hospeda as imagens e as miniaturas premium geradas pela Mastim.
+
+## ⚙️ Como rodar o projeto localmente
+
+1. Clone o projeto para o seu ambiente local.
+2. Instale as dependências rodando:
+
+```bash
+npm install
+```
+
+3. Inicie o ambiente de desenvolvimento local:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado ao vivo.
