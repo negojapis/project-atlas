@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Legacy/Base Colors (Kept for compatibility during refactor if needed) */
   --color-mastim-deep-black: #050505;
   --color-mastim-secondary-black: #090909;
   --color-mastim-card: #101010;
@@ -9,15 +10,61 @@
   --color-mastim-red: #E10613;
   --color-mastim-white: #F5F5F5;
   --color-mastim-gray: #A6A6A6;
-  
+
+  /* Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #888888;
+  --color-text-tertiary: #555555;
+  --color-text-micro: #333333;
+
+  /* Border System */
+  --color-border-subtle: #111111;
+  --color-border-default: #222222;
+  --color-border-focus: #333333;
+  --color-border-active: #E10613;
+
+  /* Backgrounds */
+  --color-bg-base: #050505;
+  --color-bg-surface: #101010;
+  --color-bg-hover: #171717;
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Radius System */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+
+  /* Z-index System */
+  --z-background: 0;
+  --z-content: 10;
+  --z-overlay: 20;
+  --z-navigation: 30;
+  --z-loader: 40;
+  --z-modal: 50;
+
+  /* Motion Tokens (Durations) */
+  --animate-duration-fast: 300ms;
+  --animate-duration-normal: 500ms;
+  --animate-duration-slow: 700ms;
+  --animate-duration-hero: 1500ms;
 }
 
 body {
-  background: var(--color-mastim-deep-black);
-  color: var(--color-mastim-white);
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
   font-family: var(--font-sans), sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -38,3 +85,37 @@ body {
 @utility bg-noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
+
+/* 
+  Motion Utilities 
+  Fade = contemplação
+  Slide = descoberta
+  Glow = conexão
+  Pulse = vida
+  Scale = confirmação
+*/
+@utility motion-fade {
+  transition-property: opacity, filter;
+  transition-timing-function: ease-out;
+}
+@utility motion-slide {
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.2, 1);
+}
+@utility motion-glow {
+  transition-property: box-shadow, border-color, background-color, color;
+  transition-timing-function: ease-out;
+}
+@utility motion-pulse {
+  transition-property: transform, opacity, box-shadow;
+  transition-timing-function: ease-in-out;
+}
+@utility motion-scale {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Icon System */
+@utility icon-sm { width: 16px; height: 16px; }
+@utility icon-md { width: 24px; height: 24px; }
+@utility icon-lg { width: 32px; height: 32px; }

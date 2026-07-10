@@ -2,6 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import SectionTitle from "@/components/ui/SectionTitle";
+import MicroLabel from "@/components/ui/MicroLabel";
 
 export default function Loader({ onComplete }) {
   const [phase, setPhase] = useState("silence"); // silence, mark, text, signature, out
@@ -39,7 +41,7 @@ export default function Loader({ onComplete }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] overflow-hidden"
+          className="fixed inset-0 z-loader flex flex-col items-center justify-center bg-bg-base overflow-hidden"
         >
           <div className="flex flex-col items-center justify-center w-full px-6 relative h-[60vh]">
             
@@ -54,12 +56,12 @@ export default function Loader({ onComplete }) {
                   transition={{ duration: 1, ease: "easeInOut" }} // Fade = contemplação
                   className="flex flex-col items-center justify-center text-center space-y-8 w-full h-full"
                 >
-                  <p className="text-white text-2xl md:text-4xl lg:text-5xl font-serif font-light leading-relaxed tracking-wide opacity-90 w-full px-4 md:px-12">
-                    "Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu."
-                  </p>
-                  <span className="text-[#666666] text-sm md:text-base font-sans font-light tracking-[0.3em] uppercase">
+                  <SectionTitle as="p" className="text-2xl md:text-4xl lg:text-5xl opacity-90 w-full px-4 md:px-12 text-text-primary">
+                    &quot;Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu.&quot;
+                  </SectionTitle>
+                  <MicroLabel className="text-text-tertiary">
                     — Eclesiastes 3:1
-                  </span>
+                  </MicroLabel>
                 </motion.div>
               )}
             </AnimatePresence>

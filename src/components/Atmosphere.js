@@ -1,8 +1,40 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function Atmosphere() {
+  const [timeData, setTimeData] = useState({ time: '--:--:-- BRT', date: '--.--.----' });
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      
+      const timeFormatter = new Intl.DateTimeFormat('pt-BR', {
+        timeZone: 'America/Sao_Paulo',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+      
+      const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
+        timeZone: 'America/Sao_Paulo',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+
+      setTimeData({
+        time: timeFormatter.format(now) + ' BRT',
+        date: dateFormatter.format(now).replace(/\//g, '.')
+      });
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-[#050505]">
       
@@ -30,10 +62,10 @@ export default function Atmosphere() {
       />
       
       {/* Coordenadas e Marcas Técnicas */}
-      <div className="absolute top-12 left-12 opacity-[0.15] font-mono text-[9px] tracking-[0.3em] text-white flex flex-col gap-1">
-        <span>SYS.CORE.01</span>
-        <span>LAT 23.54</span>
-        <span>LONG 46.63</span>
+      <div className="absolute top-12 left-12 opacity-[0.3] font-mono text-[9px] tracking-[0.3em] text-white flex flex-col gap-1 w-32">
+        <span>SYS.TIME.BRT</span>
+        <span>{timeData.time}</span>
+        <span>{timeData.date}</span>
       </div>
       
       <div className="absolute bottom-12 right-12 opacity-[0.15] font-mono text-[9px] tracking-[0.3em] text-white">
@@ -45,13 +77,7 @@ export default function Atmosphere() {
       <div className="absolute top-0 left-1/2 w-[1px] h-4 bg-white opacity-[0.1]"></div>
       <div className="absolute bottom-0 left-1/2 w-[1px] h-4 bg-white opacity-[0.1]"></div>
 
-      {/* Layer 4: Luz (Muito suave, sem brilho excessivo) */}
-      <div 
-        className="absolute inset-0 opacity-40 mix-blend-screen"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%)'
-        }}
-      />
+
 
     </div>
   );

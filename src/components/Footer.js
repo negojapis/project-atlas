@@ -3,15 +3,112 @@
 import { motion } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { ArrowUp } from "lucide-react";
+import SectionContainer from "@/components/ui/SectionContainer";
+import SectionTitle from "@/components/ui/SectionTitle";
+import MicroLabel from "@/components/ui/MicroLabel";
+import Command from "@/components/ui/Command";
+import Divider from "@/components/ui/Divider";
+import SocialIcons from "@/components/ui/SocialIcons";
 
-const quickLinks = [
-  { name: "Grace Code", href: "https://www.instagram.com/gracecode.systems/" },
-  { name: "Divine Brew", href: "https://divinebrewco.com/" },
-  { name: "Mastimverse", href: "https://discord.gg/rzC7RA6Qt" },
-  { name: "Scripts", href: "https://drive.google.com/file/d/127TY_cUChI2gKstUZqomVLK7E4GYbceO/view?usp=drive_link" },
-  { name: "YouTube", href: "https://www.youtube.com/@Mastimoficial" },
-  { name: "WhatsApp", href: "https://wa.me/5511940634737" },
-];
+
+import { useState, useEffect } from "react";
+
+const TypewriterGroup = () => {
+  const [counts, setCounts] = useState([0, 0, 0]);
+  
+  useEffect(() => {
+    let timeout;
+    let isDeleting = false;
+    let lineIndex = 0;
+    let currentCounts = [0, 0, 0];
+    let isMounted = true;
+    
+    const phrases = [
+      "Muito além de projetos.",
+      "Construo conexões.",
+      "Crio experiências."
+    ];
+    
+    const tick = () => {
+      if (!isMounted) return;
+      
+      if (!isDeleting) {
+        // Digitando
+        if (currentCounts[lineIndex] < phrases[lineIndex].length) {
+          currentCounts[lineIndex]++;
+          setCounts([...currentCounts]);
+          timeout = setTimeout(tick, 60); // Velocidade de digitação
+        } else {
+          // Terminou a linha atual
+          if (lineIndex < 2) {
+            lineIndex++;
+            timeout = setTimeout(tick, 300); // Pausa breve entre linhas
+          } else {
+            // Terminou todas as linhas, aguarda antes de apagar
+            isDeleting = true;
+            timeout = setTimeout(tick, 4000); 
+          }
+        }
+      } else {
+        // Apagando
+        if (currentCounts[lineIndex] > 0) {
+          currentCounts[lineIndex]--;
+          setCounts([...currentCounts]);
+          timeout = setTimeout(tick, 20); // Velocidade de apagar (mais rápida)
+        } else {
+          // Terminou de apagar a linha atual
+          if (lineIndex > 0) {
+            lineIndex--;
+            timeout = setTimeout(tick, 100);
+          } else {
+            // Terminou de apagar tudo, aguarda antes de recomeçar
+            isDeleting = false;
+            timeout = setTimeout(tick, 1500);
+          }
+        }
+      }
+    };
+    
+    // Inicia o loop após 1 segundo
+    timeout = setTimeout(tick, 1000);
+    
+    return () => {
+      isMounted = false;
+      clearTimeout(timeout);
+    };
+  }, []);
+  
+  const phrases = [
+    "Muito além de projetos.",
+    "Construo conexões.",
+    "Crio experiências."
+  ];
+  
+  const classes = [
+    "text-text-primary",
+    "text-text-secondary",
+    "text-text-tertiary"
+  ];
+  
+  return (
+    <div className="flex flex-col items-center space-y-4">
+      {phrases.map((phrase, lineIdx) => (
+        <SectionTitle key={lineIdx} className={classes[lineIdx]}>
+          <span className="inline-block">
+            {Array.from(phrase).map((letter, charIdx) => (
+              <span 
+                key={charIdx} 
+                className={charIdx < counts[lineIdx] ? "opacity-100" : "opacity-0"}
+              >
+                {letter === " " ? "\u00A0" : letter}
+              </span>
+            ))}
+          </span>
+        </SectionTitle>
+      ))}
+    </div>
+  );
+};
 
 export default function Footer() {
   const lenis = useLenis();
@@ -28,79 +125,62 @@ export default function Footer() {
     <footer className="relative pt-32 pb-[env(safe-area-inset-bottom)] px-6 overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         
-        {/* Quick Links */}
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-40 w-full">
-          {quickLinks.map((link, index) => (
-            <motion.a
-              key={index}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 10 }}
+        {/* Footer Bottom / Next Chapter (Epílogo) */}
+        <div className="flex flex-col items-center text-center space-y-24 w-full z-content">
+          
+          <div className="flex flex-col items-center space-y-4">
+            <TypewriterGroup />
+
+            {/* CTA & Social Links */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-              className="text-[#666666] text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] md:hover:text-white active:scale-95 active:text-white transition-all duration-300 p-2"
+              transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
+              className="pt-32 pb-8 flex flex-col items-center gap-10 w-full"
             >
-              [ {link.name} ]
-            </motion.a>
-          ))}
-        </div>
-
-        {/* Footer Bottom / Next Chapter (Epílogo) */}
-        <div className="flex flex-col items-center text-center space-y-24 w-full">
-          
-          <motion.div
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="flex flex-col items-center space-y-4"
-          >
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif font-light text-white tracking-wide leading-tight">
-              Não construo apenas projetos.
-            </h2>
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif font-light text-[#888888] tracking-wide leading-tight">
-              Construo conexões.
-            </h2>
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif font-light text-[#555555] tracking-wide leading-tight">
-              Construo experiências.
-            </h2>
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif font-light text-[#333333] tracking-wide leading-tight pt-8">
-              Construo o Universo Mastim.
-            </h2>
-
-            <motion.h3 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 2, delay: 1, ease: "easeOut" }}
-              className="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.5em] text-[#555555] pt-24"
-            >
-              O futuro continua sendo construído.
-            </motion.h3>
-          </motion.div>
+              <MicroLabel className="tracking-[0.3em] text-text-secondary">
+                VAMOS CONSTRUIR ALGO JUNTOS?
+              </MicroLabel>
+              
+              <SocialIcons />
+            </motion.div>
+          </div>
 
           {/* Fim do Livro / Restart */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-            className="pt-16 pb-8 border-t border-[#111111] w-full max-w-2xl flex flex-col items-center"
-          >
-            <p className="text-[#333333] uppercase tracking-[0.5em] font-mono text-[9px] mb-8">
-              MASTIM // EPILOGUE — 2026
-            </p>
-            <button
-              onClick={scrollToTop}
-              className="group flex flex-col items-center gap-4 text-[#444444] md:hover:text-white active:scale-90 active:text-white transition-all duration-500 p-4"
+          <div className="pt-16 pb-8 w-full max-w-2xl flex flex-col items-center relative">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, delay: 1.5, ease: "easeOut" }}
+              className="absolute top-0 left-0 right-0 origin-center"
             >
-              <div className="w-12 h-12 rounded-full border border-[#111111] flex items-center justify-center md:group-hover:border-[#333333] group-active:border-[#555555] transition-colors duration-500">
-                <ArrowUp className="w-3 h-3 opacity-50 md:group-hover:opacity-100 md:group-hover:-translate-y-1 group-active:translate-y-0 transition-all duration-500" />
-              </div>
-            </button>
-          </motion.div>
+              <Divider />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, delay: 2.0, ease: "easeOut" }}
+            >
+              <MicroLabel className="mb-8 tracking-[0.5em]">
+                MASTIM // EPILOGUE — 2026
+              </MicroLabel>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, delay: 3.5, ease: "easeOut" }}
+            >
+              <Command onClick={scrollToTop} className="min-h-[64px] min-w-[64px] rounded-full border border-border-subtle hover:border-border-focus active:border-text-tertiary flex items-center justify-center motion-glow duration-normal">
+                <ArrowUp className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:-translate-y-1 group-active:translate-y-0 transition-all duration-normal" />
+              </Command>
+            </motion.div>
+          </div>
         </div>
       </div>
     </footer>

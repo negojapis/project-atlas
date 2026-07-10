@@ -3,6 +3,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import SectionContainer from "@/components/ui/SectionContainer";
+import MicroLabel from "@/components/ui/MicroLabel";
+import SectionTitle from "@/components/ui/SectionTitle";
+import SectionSubtitle from "@/components/ui/SectionSubtitle";
+import BodyText from "@/components/ui/BodyText";
+import Command from "@/components/ui/Command";
+import CoreNode from "@/components/ui/CoreNode";
 
 const projects = [
   { name: "Grace Code", angle: -90, dur: "0.2s", ease: "linear", desc: "Engenharia de alta escala.", action: "Conhecer Grace Code" },
@@ -44,7 +51,7 @@ export default function MastimCore() {
   const isHoveringAny = hoveredIndex !== null;
 
   return (
-    <section id="core" className="relative w-full flex flex-col items-center justify-center py-32 md:py-48 px-6 bg-transparent overflow-hidden">
+    <SectionContainer id="core" className="flex flex-col items-center justify-center">
 
       <div className="relative w-full max-w-[1200px] h-[700px] md:h-[900px] flex items-center justify-center">
         
@@ -62,7 +69,7 @@ export default function MastimCore() {
                   strokeWidth="0.5"
                   strokeOpacity={isHovered ? 0.4 : 0}
                   style={{
-                    transition: isHoveringAny ? 'stroke-opacity 0.4s ease-out 0.1s' : 'stroke-opacity 0.8s ease-in-out'
+                    transition: isHovered ? 'stroke-opacity 0.4s ease-out 150ms' : 'stroke-opacity 0.2s ease-in-out 0ms'
                   }}
                 />
               </g>
@@ -71,28 +78,25 @@ export default function MastimCore() {
         </svg>
 
         {/* Central Observatory (The Origin) */}
-        <div className="absolute z-10 flex flex-col items-center justify-center">
+        <div className="absolute z-content flex flex-col items-center justify-center">
           <motion.div 
             initial={{ scale: 1 }}
             whileInView={{ scale: [1, 1.05, 1] }}
             viewport={{ once: true }}
             transition={{ delay: 0.8, duration: 0.5, ease: "easeOut" }}
-            className={`relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center mb-6 ${hoveredIndex !== null ? 'scale-105 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]' : 'scale-100'}`}
-            style={{ transition: isHoveringAny ? 'all 0.3s ease-out' : 'all 0.8s ease-in-out' }}
+            className={`relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center mb-6 transition-all duration-normal motion-fade ${hoveredIndex !== null ? 'scale-105 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]' : 'scale-100'}`}
           >
             <Image
               src="/foto.3.png"
               alt="Mastim Core"
               fill
-              className="object-contain z-10"
+              sizes="(max-width: 768px) 96px, 128px"
+              className="object-contain z-content"
             />
           </motion.div>
-          <span 
-            className="text-[#333333] text-[9px] md:text-[10px] uppercase font-mono tracking-[0.5em] z-10"
-            style={{ transition: isHoveringAny ? 'color 0.3s ease-out' : 'color 0.8s ease-in-out' }}
-          >
+          <MicroLabel className="z-content transition-colors duration-normal">
             {hoveredIndex !== null ? 'THE ORIGIN [ ACTIVE ]' : 'THE ORIGIN'}
-          </span>
+          </MicroLabel>
         </div>
 
         {/* Orbiting Entities */}
@@ -101,15 +105,10 @@ export default function MastimCore() {
           const isHovered = hoveredIndex === i;
           const isOtherHovered = hoveredIndex !== null && hoveredIndex !== i;
 
-          // Personalidade de cada projeto
-          const projectTransition = isHoveringAny 
-            ? `all ${proj.dur} ${proj.ease} 0.2s` 
-            : `all 0.8s ease-in-out`;
-
           return (
             <div
               key={i}
-              className="absolute z-20 flex flex-col items-center justify-center cursor-pointer group"
+              className="absolute z-overlay flex flex-col items-center justify-center cursor-pointer group"
               style={{ 
                 left: '50%', 
                 top: '50%',
@@ -125,48 +124,41 @@ export default function MastimCore() {
                 whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 1.2 + i * 0.1, duration: 1, ease: "easeOut" }}
-                className={`flex flex-col items-center justify-center ${isOtherHovered ? 'opacity-20 scale-95' : 'opacity-100 scale-100'}`}
-                style={{ transition: projectTransition }}
+                className={`flex flex-col items-center justify-center transition-all duration-normal motion-fade ${isOtherHovered ? 'opacity-20 scale-95' : 'opacity-100 scale-100'}`}
               >
                 
                 {/* Gallery Lighting */}
-                <div className={`absolute inset-0 w-[200px] h-[200px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none mix-blend-screen ${isHovered ? 'opacity-30' : 'opacity-0'}`}
+                <div className={`absolute inset-0 w-[200px] h-[200px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none mix-blend-screen transition-all duration-slow ${isHovered ? 'opacity-30' : 'opacity-0'}`}
                      style={{ 
                        background: 'radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 60%)', 
                        left: '50%', top: '50%',
-                       transition: projectTransition 
+                       transitionDelay: isHovered ? '300ms' : '0ms'
                      }} />
 
                 {/* Entity Point */}
-                <div className={`mb-6 rounded-full ${
-                  isHovered 
-                    ? 'w-2 h-2 md:w-3 md:h-3 bg-white shadow-[0_0_20px_rgba(255,255,255,0.4)]' 
-                    : 'w-1 h-1 md:w-1.5 md:h-1.5 bg-[#444444]'
-                }`} style={{ transition: projectTransition }} />
+                <CoreNode active={isHovered} className="mb-6" style={{ transitionDelay: isHovered ? '300ms' : '0ms' }} />
                 
                 {/* Entity Title */}
-                <span className={`whitespace-nowrap absolute top-4 md:top-6 ${
-                  isHovered 
-                    ? 'text-white text-2xl md:text-4xl font-serif font-light tracking-wide' 
-                    : 'text-[#666666] text-xl md:text-3xl font-serif font-light tracking-wide'
-                }`} style={{ transition: projectTransition }}>
+                <BodyText as="span" className={`whitespace-nowrap absolute top-4 md:top-6 transition-colors duration-normal ${
+                  isHovered ? 'text-text-primary scale-110' : 'text-text-secondary'
+                }`} style={{ transitionDelay: isHovered ? '300ms' : '0ms' }}>
                   {proj.name}
-                </span>
+                </BodyText>
 
                 {/* Entity Description (Revealed after Title) */}
-                <span className={`absolute top-14 md:top-16 text-[#888888] text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] whitespace-nowrap pointer-events-none ${
+                <SectionSubtitle as="span" className={`absolute top-12 md:top-14 whitespace-nowrap pointer-events-none transition-all duration-normal motion-fade ${
                   isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
-                }`} style={{ transition: isHovered ? `all 0.4s ease-out 0.4s` : `all 0.2s ease-in-out 0s` }}>
+                }`} style={{ transitionDelay: isHovered ? '450ms' : '0ms' }}>
                   {proj.desc}
-                </span>
+                </SectionSubtitle>
                 
                 {/* Action Command (Revealed after Description) */}
-                <a href="#" className={`absolute top-24 md:top-28 text-[#555] md:hover:text-white active:scale-95 active:text-white text-[10px] uppercase font-mono tracking-[0.3em] flex items-center gap-2 p-4 -m-4 ${
+                <Command href="#" className={`absolute top-20 md:top-24 transition-all duration-normal motion-fade ${
                   isHovered ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'
-                }`} style={{ transition: isHovered ? `all 0.4s ease-out 0.8s` : `all 0.2s ease-in-out 0s` }}>
+                }`} style={{ transitionDelay: isHovered ? '600ms' : '0ms' }}>
                   <span className="opacity-40">→</span>
                   {proj.action}
-                </a>
+                </Command>
 
               </motion.div>
             </div>
@@ -174,6 +166,6 @@ export default function MastimCore() {
         })}
       </div>
       
-    </section>
+    </SectionContainer>
   );
 }

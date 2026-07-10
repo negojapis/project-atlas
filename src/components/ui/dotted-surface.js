@@ -8,7 +8,8 @@ export function DottedSurface({ className, ...props }) {
 	const sceneRef = useRef(null);
 
 	useEffect(() => {
-		if (!containerRef.current) return;
+		const container = containerRef.current;
+		if (!container) return;
 
 		// Scene setup
 		const scene = new THREE.Scene();
@@ -31,7 +32,7 @@ export function DottedSurface({ className, ...props }) {
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		renderer.setClearColor(0x000000, 0);
 
-		containerRef.current.appendChild(renderer.domElement);
+		container.appendChild(renderer.domElement);
 
 		// Create Plane Geometry
 		const geometry = new THREE.PlaneGeometry(6000, 4000, 120, 100);
@@ -122,8 +123,8 @@ export function DottedSurface({ className, ...props }) {
 				sceneRef.current.mesh.material.dispose();
 				sceneRef.current.renderer.dispose();
 
-				if (containerRef.current && sceneRef.current.renderer.domElement) {
-					containerRef.current.removeChild(sceneRef.current.renderer.domElement);
+				if (container && sceneRef.current.renderer.domElement) {
+					container.removeChild(sceneRef.current.renderer.domElement);
 				}
 			}
 		};
