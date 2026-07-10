@@ -21,6 +21,7 @@ export const viewport = {
 };
 
 export const metadata = {
+  metadataBase: new URL('https://mastim.vercel.app'),
   title: "MASTIM // EXPERIENCE",
   description: "Toda grande construção começa com curiosidade. Um ecossistema onde tecnologia, criatividade, empreendedorismo e comunidade se conectam.",
   icons: {
