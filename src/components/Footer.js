@@ -166,7 +166,7 @@ export default function Footer() {
               transition={{ duration: 1.5, delay: 2.0, ease: "easeOut" }}
             >
               <MicroLabel className="mb-8 tracking-[0.5em]">
-                MASTIM // EPILOGUE — 2026
+                MASTIM // VISION — 2026
               </MicroLabel>
             </motion.div>
 

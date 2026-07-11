@@ -1,40 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 
 export default function Atmosphere() {
-  const [timeData, setTimeData] = useState({ time: '--:--:-- BRT', date: '--.--.----' });
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      
-      const timeFormatter = new Intl.DateTimeFormat('pt-BR', {
-        timeZone: 'America/Sao_Paulo',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      });
-      
-      const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
-        timeZone: 'America/Sao_Paulo',
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      });
-
-      setTimeData({
-        time: timeFormatter.format(now) + ' BRT',
-        date: dateFormatter.format(now).replace(/\//g, '.')
-      });
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-[#050505]">
       
@@ -60,17 +28,6 @@ export default function Atmosphere() {
           backgroundPosition: 'center center'
         }}
       />
-      
-      {/* Coordenadas e Marcas Técnicas */}
-      <div className="absolute top-12 left-12 opacity-[0.3] font-mono text-[9px] tracking-[0.3em] text-white flex flex-col gap-1 w-32">
-        <span>SYS.TIME.BRT</span>
-        <span>{timeData.time}</span>
-        <span>{timeData.date}</span>
-      </div>
-      
-      <div className="absolute bottom-12 right-12 opacity-[0.15] font-mono text-[9px] tracking-[0.3em] text-white">
-        <span>ATLAS // v8.0.0</span>
-      </div>
 
       <div className="absolute top-1/2 left-0 w-4 h-[1px] bg-white opacity-[0.1]"></div>
       <div className="absolute top-1/2 right-0 w-4 h-[1px] bg-white opacity-[0.1]"></div>
