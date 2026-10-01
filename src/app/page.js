@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 import Hero from "@/components/Hero";
-import MastimverseIntro from "@/components/MastimverseIntro";
-import Projects from "@/components/Projects";
-import Archive from "@/components/Archive";
 import About from "@/components/About";
-import CurrentObsessions from "@/components/CurrentObsessions";
 import Lab from "@/components/Lab";
+import Websites from "@/components/Websites";
+import Services from "@/components/Services";
+import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import Atmosphere from "@/components/Atmosphere";
 import Loader from "@/components/Loader";
@@ -28,13 +27,11 @@ export default function Home() {
         <div className="relative z-content flex flex-col">
           <Hero />
           
-          {/* <MastimverseIntro /> */}
-          {/* <Projects /> */}
-          {/* <Archive /> */}
-          
           <About />
-          {/* <CurrentObsessions /> */}
           <Lab />
+          <Websites />
+          <Services />
+          <Testimonials />
           <Footer />
         </div>
       )}

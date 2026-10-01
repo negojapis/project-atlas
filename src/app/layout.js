@@ -22,14 +22,14 @@ export const viewport = {
 
 export const metadata = {
   metadataBase: new URL('https://mastim.vercel.app'),
-  title: "MASTIM // EXPERIENCE",
+  title: "Mastimverse",
   description: "Toda grande construção começa com curiosidade. Um ecossistema onde tecnologia, criatividade, empreendedorismo e comunidade se conectam.",
   icons: {
     icon: '/icon.png',
     apple: '/icon.png',
   },
   openGraph: {
-    title: "MASTIM // EXPERIENCE",
+    title: "Mastimverse",
     description: "Toda grande construção começa com curiosidade. Um ecossistema onde tecnologia e criatividade se conectam.",
     url: "https://mastim.experience",
     siteName: "MASTIM",
@@ -46,7 +46,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "MASTIM // EXPERIENCE",
+    title: "Mastimverse",
     description: "Toda grande construção começa com curiosidade.",
     images: ['/icon.png'],
   },
