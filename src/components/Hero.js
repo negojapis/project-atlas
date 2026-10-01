@@ -1,119 +1,106 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
-import HeroTitle from "@/components/ui/HeroTitle";
-import SectionSubtitle from "@/components/ui/SectionSubtitle";
-import Command from "@/components/ui/Command";
+import CreativeLicenseCard from "@/components/ui/CreativeLicenseCard";
 
 export default function Hero() {
-  const [timeData, setTimeData] = useState({ time: '--:--:-- BRT', date: '--.--.----' });
+  // Scroll animations
+  const { scrollY } = useScroll();
+  
+  // Archiving effect for the card
+  const cardScale = useTransform(scrollY, [0, 400], [1, 0.4]);
+  const cardY = useTransform(scrollY, [0, 400], [0, -300]);
+  const cardRotateX = useTransform(scrollY, [0, 400], [0, 60]);
+  const cardOpacity = useTransform(scrollY, [0, 400], [1, 0]);
 
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      
-      const timeFormatter = new Intl.DateTimeFormat('pt-BR', {
-        timeZone: 'America/Sao_Paulo',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      });
-      
-      const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
-        timeZone: 'America/Sao_Paulo',
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      });
-
-      setTimeData({
-        time: timeFormatter.format(now) + ' BRT',
-        date: dateFormatter.format(now).replace(/\//g, '.')
-      });
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  // Fade out other hero elements
+  const heroFade = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative w-full h-[100svh] bg-transparent overflow-hidden flex flex-col items-center justify-center">
-
-      {/* Coordenadas e Marcas Técnicas - Somente na Hero agora */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ duration: 2, delay: 2 }}
-        className="absolute top-6 left-6 md:top-12 md:left-12 font-mono text-[9px] tracking-[0.3em] text-white flex flex-col gap-1 w-32 z-10"
-      >
-        <span>SYS.TIME.BRT</span>
-        <span>{timeData.time}</span>
-        <span>{timeData.date}</span>
-      </motion.div>
+    <section className="relative w-full h-[100svh] bg-bg-base overflow-hidden flex flex-col items-center justify-center">
       
+      {/* Main Hero Content */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.15 }}
-        transition={{ duration: 2, delay: 2 }}
-        className="absolute bottom-6 right-6 md:bottom-12 md:right-12 font-mono text-[9px] tracking-[0.3em] text-white z-10 hidden md:block"
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute inset-0 w-full h-full flex flex-col items-center justify-center"
       >
-        <span>ATLAS // v8.0.0</span>
-      </motion.div>
-
-      <div className="relative z-content w-full h-full flex flex-col items-center justify-center px-6">
-
-        {/* MASTIM (A Marca - Domina a tela) */}
-        <motion.div
-          initial={{ opacity: 0, filter: "blur(10px)", scale: 0.98 }}
-          animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-          transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
-          className="w-full flex justify-center -translate-y-8 md:-translate-y-16"
+        {/* Background Gigantic Text (Mastim) */}
+        <motion.div 
+          style={{ opacity: heroFade }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-0"
         >
-          <HeroTitle className="text-[18vw] md:text-[14vw] lg:text-[15vw] font-medium tracking-tighter leading-none select-none mb-4 md:mb-0 whitespace-nowrap transition-all duration-700 hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] cursor-default">
+          {/* MASTIM */}
+          <h1 className="text-[22vw] font-black text-white/30 tracking-tighter leading-none whitespace-nowrap drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] uppercase mix-blend-overlay">
             MASTIM
-          </HeroTitle>
+          </h1>
         </motion.div>
 
-        {/* Subtitle - Próximo ao MASTIM */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut", delay: 2.8 }}
-          className="-translate-y-8 md:-translate-y-16 mt-2 md:mt-4"
-        >
-          <SectionSubtitle className="text-center tracking-[0.25em] md:tracking-[0.5em] text-[9px] sm:text-[10px] md:text-sm text-text-tertiary whitespace-nowrap">
-            O futuro continua sendo construído.
-          </SectionSubtitle>
-        </motion.div>
+        <div className="relative z-20 w-full h-full flex flex-col items-center justify-center px-6 [perspective:1000px]">
+          
+          {/* Main Card Element */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: [0.2, 1, 0.2, 1], delay: 0.2 }}
+            style={{ 
+              scale: cardScale,
+              y: cardY,
+              rotateX: cardRotateX,
+              opacity: cardOpacity,
+              transformStyle: "preserve-3d"
+            }}
+            className="w-full flex justify-center mb-8 origin-top"
+          >
+            <CreativeLicenseCard />
+          </motion.div>
 
-        {/* Thumb Zone - Fixado na base, respeitando safe-area */}
-        <div className="absolute bottom-[calc(2rem+env(safe-area-inset-bottom))] md:bottom-24 w-full flex flex-col items-center gap-10 md:gap-12">
+          {/* Subtitles & Descriptions */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 1 }}
+            style={{ opacity: heroFade }}
+            className="flex flex-col items-center gap-6 text-center mt-4"
+          >
+            <div className="font-mono text-[9px] md:text-xs tracking-[0.3em] text-text-secondary flex flex-col md:flex-row gap-2 md:gap-4 uppercase">
+              <span>Diretor Criativo</span>
+              <span className="hidden md:inline">•</span>
+              <span>Desenvolvedor</span>
+              <span className="hidden md:inline">•</span>
+              <span>Designer Visual</span>
+              <span className="hidden md:inline">•</span>
+              <span>Criativo Multidisciplinar</span>
+            </div>
+          </motion.div>
 
-
-
-          {/* Commands (Touch Targets > 48px, Tap-down motion) */}
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut", delay: 4.6 }}
-            className="flex items-center gap-8 md:gap-24 opacity-80"
+            transition={{ duration: 1, ease: "easeOut", delay: 1.5 }}
+            style={{ opacity: heroFade }}
+            className="absolute bottom-12"
           >
-            <Command href="#core" className="gap-3">
-              <span className="opacity-40 md:group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-normal md:group-hover:translate-x-1 group-active:translate-x-1">→</span>
-              EXPLORAR
-            </Command>
-            <Command href="https://wa.me/5511940634737" target="_blank" rel="noopener noreferrer" className="gap-3">
-              <span className="opacity-40 md:group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-normal md:group-hover:translate-x-1 group-active:translate-x-1">→</span>
-              CONTATO
-            </Command>
+            <a 
+              href="#mastimverse" 
+              className="font-mono text-[10px] tracking-widest text-mastim-red hover:text-text-primary transition-colors duration-300 flex flex-col items-center gap-2 group"
+            >
+              ENTRAR NO MASTIMVERSE
+              <motion.span 
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="group-hover:text-mastim-red text-text-secondary transition-colors"
+              >
+                ↓
+              </motion.span>
+            </a>
           </motion.div>
 
         </div>
-
-      </div>
+      </motion.div>
     </section>
   );
 }

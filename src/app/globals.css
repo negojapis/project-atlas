@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Legacy/Base Colors (Kept for compatibility during refactor if needed) */
-  --color-mastim-deep-black: #050505;
-  --color-mastim-secondary-black: #090909;
+  /* Legacy/Base Colors */
+  --color-mastim-deep-black: #080808;
+  --color-mastim-secondary-black: #0A0A0A;
   --color-mastim-card: #101010;
   --color-mastim-hover: #171717;
   --color-mastim-border: #252525;
-  --color-mastim-red: #E10613;
-  --color-mastim-white: #F5F5F5;
+  --color-mastim-red: #E52B1A;
+  --color-mastim-offwhite: #EAE4D8;
   --color-mastim-gray: #A6A6A6;
+  --color-mastim-petrol: #123C40;
 
   /* Text Colors */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #888888;
+  --color-text-primary: #EAE4D8; /* Off-white for primary text */
+  --color-text-secondary: #A6A6A6;
   --color-text-tertiary: #555555;
   --color-text-micro: #333333;
 
@@ -21,12 +22,12 @@
   --color-border-subtle: #111111;
   --color-border-default: #222222;
   --color-border-focus: #333333;
-  --color-border-active: #E10613;
+  --color-border-active: #E52B1A;
 
   /* Backgrounds */
-  --color-bg-base: #050505;
-  --color-bg-surface: #101010;
-  --color-bg-hover: #171717;
+  --color-bg-base: #080808;
+  --color-bg-surface: #0A0A0A;
+  --color-bg-hover: #121212;
 
   /* Fonts */
   --font-sans: var(--font-geist-sans);

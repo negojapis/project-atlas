@@ -1,140 +1,112 @@
 "use client";
 
-import { motion } from "framer-motion";
-import SectionSubtitle from "@/components/ui/SectionSubtitle";
-import Divider from "@/components/ui/Divider";
-import ProjectCard from "@/components/ui/ProjectCard";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import Image from "next/image";
 
-const projectsData = [
-
+const editorialProjects = [
   {
-    title: "Navity",
-    segment: "Relojoaria de Luxo",
-    image: "/Navity.png",
-    languages: ["React Native", "Expo", "Firebase"],
-    systems: ["Arquitetura de Navegação", "Design System Mobile", "Autenticação Biométrica"]
+    id: "001",
+    title: "CREATIVE LICENSE",
+    category: "IDENTITY / ART DIRECTION / PERSONAL",
+    year: "2026",
+    image: "/Imagem do ChatGPT 30 de set. de 2026, 17_59_54.png", // Using the license image as project 1
+    description: "The manifestation of the Mastimverse identity. A physical/digital hybrid exploring the boundaries of a creative profile."
   },
   {
-    title: "Cars",
-    segment: "Concessionária de Carros",
-    image: "/Cars.png",
-    languages: ["Vue.js", "Nuxt", "Tailwind CSS"],
-    systems: ["Motor de Busca Avançado", "Galeria 360", "Portal de Concessionárias"]
+    id: "002",
+    title: "JAPANESE VISUAL STUDY",
+    category: "ART DIRECTION / VISUAL EXPERIMENT",
+    year: "2025",
+    image: "/foto.3.png",
+    description: "Exploração visual que mistura a disciplina do design tipográfico japonês com o caos estruturado do mundo físico."
   },
   {
-    title: "Motors",
-    segment: "Concessionária de Moto",
-    image: "/Motors.png",
-    languages: ["Next.js", "Prisma", "PostgreSQL"],
-    systems: ["Gestão de Estoque", "Agendamento de Test Drive", "Integração Bancária"]
-  },
-  {
-    title: "Makeup Artist",
-    segment: "Portfólio Profissional (Maquiagem)",
-    image: "/Makeup Art.png",
-    languages: ["Framer", "React", "CSS Animations"],
-    systems: ["Calendário Interativo", "Galeria Editorial", "Design Minimalista"]
-  },
-  {
-    title: "Lumina Beauty",
-    segment: "E-commerce de Cosmético",
-    image: "/Lumina.png",
-    languages: ["React", "Stripe API", "Framer Motion"],
-    systems: ["Carrinho Flutuante", "Recomendação por IA", "Sistema de Fidelidade"]
-  },
-  {
-    title: "Apex Finance",
-    segment: "Financiadora",
-    image: "/Apex Finance.png",
-    languages: ["TypeScript", "Next.js", "Chart.js"],
-    systems: ["Dashboard Analítico", "Integração de PIX", "Segurança Bancária"]
-  },
-  {
-    title: "Studio Blanco",
-    segment: "Arquitetura",
-    image:  "/Studio Blanco.png",
-    languages: ["WebGL", "Three.js", "GSAP"],
-    systems: ["Passeio Virtual 3D", "Portfólio Interativo", "Experiência Imersiva"]
-  },
-  {
-    title: "Hair & Co",
-    segment: "Cabeleireiro",
-    image: "/Hair & Co.png",
-    languages: ["React", "Tailwind CSS", "Node.js"],
-    systems: ["Agendamento Online", "Catálogo de Serviços", "Gestão de Clientes"]
-  },
-  {
-    title: "Vogue Apparel",
-    segment: "Loja de Roupa",
-    image: "/Vogue Apparel.png",
-    languages: ["Shopify", "Liquid", "Javascript"],
-    systems: ["Vitrine Dinâmica", "Integração de Estoque", "Checkout Rápido"]
-  },
-  {
-    title: "Step Kicks",
-    segment: "Loja de Calçados",
-    image: "/Step Kicks.png",
-    languages: ["Next.js", "Framer Motion", "Stripe API"],
-    systems: ["Filtros Avançados", "Provador Virtual 3D", "Sistema de Ofertas"]
-  },
-  {
-    title: "Prime Estates",
-    segment: "Imobiliária",
-    image: "/Prime Estates.png",
-    languages: ["Vue.js", "Firebase", "Google Maps API"],
-    systems: ["Busca por Mapa", "Agendamento de Visitas", "Painel do Corretor"]
-  },
-  {
-    title: "Gamer X",
-    segment: "Jogos / Identidade para Twitch",
-    image: "/Gamer x.png",
-    languages: ["Figma", "After Effects", "OBS Studio"],
-    systems: ["Overlays Animados", "Alertas Customizados", "Painéis de Stream"]
-  },
-  {
-    title: "Vision Optics",
-    segment: "Ótica",
-    image: "/Vision Optics.png",
-    languages: ["React", "CSS Modules", "Redux"],
-    systems: ["Teste de Armação Virtual", "Prescrição Online", "Catálogo de Lentes"]
+    id: "003",
+    title: "EDITORIAL STUDY",
+    category: "CREATIVE DIRECTION / PHOTOGRAPHY",
+    year: "2024",
+    image: "/foto.png",
+    description: "Ensaio fotográfico editorial com forte ênfase em sombra, texturas reais e composição minimalista."
   }
 ];
 
-export default function Projects() {
-  // Duplicamos o array para criar a ilusão de loop infinito na esteira
-  const duplicatedProjects = [...projectsData, ...projectsData];
+function EditorialProject({ project }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   return (
-    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-transparent z-content">
+    <div ref={ref} className="w-full flex flex-col items-center justify-center py-24 border-b border-white/5 last:border-0 group">
       
-      {/* Cabeçalho da Sessão */}
-      <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col gap-6">
-        <SectionSubtitle as="h2" className="flex items-center gap-4">
-          <Divider className="w-8" />
-          ARQUIVO DE PROJETOS
-        </SectionSubtitle>
+      {/* Editorial Header */}
+      <div className="w-full max-w-[85vw] md:max-w-[70vw] flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+        <div className="flex flex-col">
+          <span className="font-mono text-xs text-text-secondary mb-2 tracking-widest">PROJECT {project.id}</span>
+          <h3 className="font-sans font-bold text-4xl md:text-7xl text-text-primary tracking-tighter group-hover:text-mastim-red transition-colors duration-500">
+            {project.title}
+          </h3>
+          <span className="font-mono text-[10px] md:text-xs text-text-secondary mt-2 tracking-widest uppercase">
+            {project.category}
+          </span>
+        </div>
+        <div className="font-serif italic text-text-secondary text-sm md:text-base">
+          {project.year}
+        </div>
       </div>
 
-      {/* Esteira (Marquee) Container */}
-      {/* Mascaramos as bordas para sumir gradualmente (fade edges) apenas em telas grandes para não cortar de forma dura */}
-      <div className="w-full relative [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] md:[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        
-        {/* Pista de rolagem animada */}
-        <motion.div
-          className="flex gap-16 md:gap-24 px-8 w-max"
-          animate={{
-            x: ["0%", "-50%"] // Move a esteira pela metade do seu tamanho
-          }}
-          transition={{
-            duration: 50, // Muito suave e lento
-            ease: "linear",
-            repeat: Infinity,
-          }}
+      {/* Image Container with Parallax */}
+      <div className="w-full max-w-[85vw] md:max-w-[70vw] aspect-[16/9] md:aspect-[21/9] relative overflow-hidden bg-mastim-card">
+        <motion.div 
+          style={{ y, scale }}
+          className="w-full h-[120%] absolute -top-[10%]"
         >
-          {duplicatedProjects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
-          ))}
+          <Image 
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700 grayscale group-hover:grayscale-0"
+          />
         </motion.div>
+      </div>
+
+      {/* Footer / Description */}
+      <div className="w-full max-w-[85vw] md:max-w-[70vw] flex flex-col md:flex-row justify-between items-start mt-8 gap-6">
+        <p className="font-serif text-sm md:text-lg text-text-primary/70 max-w-md">
+          {project.description}
+        </p>
+        <a href="#view" className="font-mono text-[10px] md:text-xs tracking-widest text-text-primary border-b border-text-primary/30 pb-1 hover:text-mastim-red hover:border-mastim-red transition-all flex items-center gap-2">
+          VIEW PROJECT ↗
+        </a>
+      </div>
+
+    </div>
+  );
+}
+
+export default function Projects() {
+  return (
+    <section className="relative w-full py-32 bg-bg-base z-20">
+      <div className="w-full flex flex-col items-center">
+        {editorialProjects.map((project, idx) => (
+          <EditorialProject key={project.id} project={project} />
+        ))}
+
+        {/* Categories List at the bottom of Projects */}
+        <div className="w-full max-w-[85vw] md:max-w-[70vw] mt-32 flex flex-wrap gap-4 md:gap-8 opacity-50 font-mono text-xs md:text-sm tracking-widest uppercase items-center justify-center">
+          <span>Branding</span>
+          <span>Photography</span>
+          <span>Web</span>
+          <span>UI</span>
+          <span>AI</span>
+          <span>Motion</span>
+          <span>Etc.</span>
+        </div>
       </div>
     </section>
   );
