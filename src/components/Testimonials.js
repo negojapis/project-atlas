@@ -47,12 +47,13 @@ export default function Testimonials() {
         {/* Header */}
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 pb-12">
           <div className="flex flex-col">
-            <div className="flex items-end gap-2 mb-1">
-              <span className="font-sans text-mastim-red text-2xl md:text-4xl font-bold leading-none">04.</span>
-              <span className="font-mono text-xs md:text-sm tracking-widest text-text-secondary uppercase mb-1">IMPACTO &</span>
+            <div className="flex items-end gap-2 mb-2">
+              <span className="font-sans text-mastim-red text-2xl md:text-3xl font-bold leading-none">04.</span>
+              <span className="font-mono text-xs md:text-sm tracking-widest text-text-secondary uppercase mb-1">AVALIAÇÕES & CLIENTES</span>
             </div>
-            <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-text-primary leading-none uppercase">
-              FEEDBACKS
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight text-text-primary leading-[1.08]">
+              Impacto & <br />
+              <span className="font-semibold text-text-primary">Feedbacks</span>
             </h2>
           </div>
           

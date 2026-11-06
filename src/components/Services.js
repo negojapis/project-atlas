@@ -8,7 +8,7 @@ const servicesItems = [
   { id: "05", title: "Desenvolvimento Web", description: "Front-end, integrações, APIs, sistemas personalizados e manutenção." },
   { id: "06", title: "Automações & IA", description: "Automação de processos, integrações, chatbots, fluxos inteligentes e soluções com IA." },
   { id: "07", title: "Social Media & Conteúdo", description: "Planejamento visual, posts, stories, campanhas, organização de feed, identidade para redes e direção de conteúdo." },
-  { id: "08", title: "Design Gráfico", description: "Pôsteres, campanhas, peças promocionais, materiais digitais, apresentações, cardápios, banners e artes." },
+  { id: "08", title: "Design Gráfico & Publicitário", description: "Key visuals, artes publicitárias, campanhas promocionais, materiais digitais, apresentações, cardápios e peças comerciais." },
   { id: "09", title: "Fotografia", description: "Ensaios, retratos, produtos, eventos, tratamento e direção de imagem." },
   { id: "10", title: "Vídeo & Motion", description: "Captação, edição, reels, vídeos institucionais, teasers, animações e peças em movimento." },
   { id: "11", title: "Posicionamento Digital", description: "Análise de presença online, bio, linguagem, identidade, estratégia e percepção de marca." },
@@ -23,12 +23,13 @@ export default function Services() {
         {/* Header */}
         <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-12">
           <div className="flex flex-col">
-            <div className="flex items-end gap-2 mb-1">
-              <span className="font-sans text-mastim-red text-2xl md:text-4xl font-bold leading-none">03.</span>
-              <span className="font-mono text-xs md:text-sm tracking-widest text-text-secondary uppercase mb-1">O QUE EU</span>
+            <div className="flex items-end gap-2 mb-2">
+              <span className="font-sans text-mastim-red text-2xl md:text-3xl font-bold leading-none">03.</span>
+              <span className="font-mono text-xs md:text-sm tracking-widest text-text-secondary uppercase mb-1">SOLUÇÕES & SERVIÇOS</span>
             </div>
-            <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-text-primary leading-none uppercase">
-              FAÇO
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight text-text-primary leading-[1.08]">
+              O Que <br />
+              <span className="font-semibold text-text-primary">Eu Faço</span>
             </h2>
           </div>
 
