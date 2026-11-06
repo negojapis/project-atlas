@@ -116,7 +116,8 @@ export default function CreativeLicenseCard({ className }) {
             src="/Imagem do ChatGPT 30 de set. de 2026, 17_59_54.png"
             alt="Creative License Card"
             fill
-            className="object-contain"
+            draggable={false}
+            className="object-contain pointer-events-none select-none"
             priority
           />
 

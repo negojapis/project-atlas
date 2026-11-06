@@ -1,105 +1,159 @@
 "use client";
 
+import { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useState, useEffect } from "react";
-import CreativeLicenseCard from "@/components/ui/CreativeLicenseCard";
+import Image from "next/image";
+
+const BUTTERFLY_SRC = encodeURI("/Borboleta vermelha em fundo transparente.png");
 
 export default function Hero() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFlyingLoop, setIsFlyingLoop] = useState(false);
+
   // Scroll animations
   const { scrollY } = useScroll();
-  
-  // Archiving effect for the card
-  const cardScale = useTransform(scrollY, [0, 400], [1, 0.4]);
-  const cardY = useTransform(scrollY, [0, 400], [0, -300]);
-  const cardRotateX = useTransform(scrollY, [0, 400], [0, 60]);
-  const cardOpacity = useTransform(scrollY, [0, 400], [1, 0]);
 
-  // Fade out other hero elements
+  // Fade out hero elements on scroll
   const heroFade = useTransform(scrollY, [0, 300], [1, 0]);
+  const heroScale = useTransform(scrollY, [0, 300], [1, 0.95]);
+
+  const handleButterflyClick = () => {
+    if (isFlyingLoop) return;
+    setIsFlyingLoop(true);
+    setTimeout(() => {
+      setIsFlyingLoop(false);
+    }, 2400);
+  };
 
   return (
     <section className="relative w-full h-[100svh] bg-bg-base overflow-hidden flex flex-col items-center justify-center">
-      
       {/* Main Hero Content */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute inset-0 w-full h-full flex flex-col items-center justify-center"
+      <motion.div
+        style={{ opacity: heroFade, scale: heroScale }}
+        className="relative z-20 w-full h-full flex flex-col items-center justify-center px-4"
       >
-        {/* Background Gigantic Text (Mastim) */}
-        <motion.div 
-          style={{ opacity: heroFade }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-0"
+        {/* Brand Name - Central & Monumental */}
+        <motion.div
+          initial={{ opacity: 0, filter: "blur(10px)", scale: 0.95 }}
+          animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+          transition={{ duration: 1.5, ease: [0.2, 1, 0.2, 1] }}
+          className="flex flex-col items-center justify-center select-none"
         >
-          {/* MASTIM */}
-          <h1 className="text-[22vw] font-black text-white/30 tracking-tighter leading-none whitespace-nowrap drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] uppercase mix-blend-overlay">
-            MASTIM
+          <h1
+            aria-label="MASTIM"
+            className="text-[21vw] sm:text-[21.5vw] md:text-[21vw] font-black text-text-primary tracking-[0.02em] leading-none whitespace-nowrap uppercase flex items-baseline justify-center"
+          >
+            <span>MAST</span>
+            <span
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onClick={handleButterflyClick}
+              className="relative inline-flex items-center justify-center mx-[0.015em] cursor-pointer [perspective:900px]"
+            >
+              <span>I</span>
+
+              {/* Interactive Red Butterfly on the letter "I" */}
+              <motion.span
+                initial={{ opacity: 0, x: 90, y: -110, rotate: -18, scale: 0.75 }}
+                animate={
+                  isFlyingLoop
+                    ? {
+                        opacity: 1,
+                        x: [0, -45, 55, -20, 0],
+                        y: [0, -65, -95, -40, 0],
+                        rotate: [0, -16, 14, -8, 0],
+                        scale: [1, 1.12, 1.06, 1.04, 1],
+                      }
+                    : isHovered
+                    ? {
+                        opacity: 1,
+                        x: [0, 8, -6, 0],
+                        y: [-14, -24, -16, -14],
+                        rotate: [-6, 4, -4, -6],
+                        scale: 1.08,
+                      }
+                    : {
+                        opacity: 1,
+                        x: 0,
+                        y: [0, -4, 0],
+                        rotate: [0, -1.5, 0],
+                        scale: 1,
+                      }
+                }
+                transition={
+                  isFlyingLoop
+                    ? { duration: 2.4, ease: "easeInOut" }
+                    : isHovered
+                    ? {
+                        duration: 1.6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }
+                    : {
+                        opacity: { duration: 0.9, delay: 0.3 },
+                        x: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
+                        y: {
+                          duration: 3.6,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        },
+                        rotate: {
+                          duration: 3.6,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        },
+                        scale: { duration: 0.4 },
+                      }
+                }
+                className=" absolute -top-[0.42em] left-1/2 -translate-x-[38%] w-[0.58em] h-[0.58em] z-20 [transform-style:preserve-3d]"
+              >
+                {/* Wing-flapping 3D layer pivoted at the butterfly's thorax */}
+                <motion.span
+                  animate={
+                    isFlyingLoop || isHovered
+                      ? {
+                          rotateY: [0, 58, -10, 54, 0],
+                          rotateX: [0, 14, -6, 12, 0],
+                          scaleX: [1, 0.56, 1.04, 0.6, 1],
+                          skewY: [0, -6, 2, -5, 0],
+                        }
+                      : {
+                          rotateY: [0, 34, 0, 18, 0],
+                          scaleX: [1, 0.78, 1, 0.88, 1],
+                          skewY: [0, -3, 0, -1.5, 0],
+                        }
+                  }
+                  transition={
+                    isFlyingLoop || isHovered
+                      ? {
+                          duration: 0.32,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }
+                      : {
+                          duration: 3.4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }
+                  }
+                  style={{ transformOrigin: "28% 72%" }}
+                  className="block relative w-full h-full"
+                >
+                  <Image
+                    src={BUTTERFLY_SRC}
+                    alt=""
+                    fill
+                    priority
+                    draggable={false}
+                    sizes="(max-width: 768px) 25vw, 18vw"
+                    className="object-contain pointer-events-none select-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)]"
+                  />
+                </motion.span>
+              </motion.span>
+            </span>
+            <span>M</span>
           </h1>
         </motion.div>
-
-        <div className="relative z-20 w-full h-full flex flex-col items-center justify-center px-6 [perspective:1000px]">
-          
-          {/* Main Card Element */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1.5, ease: [0.2, 1, 0.2, 1], delay: 0.2 }}
-            style={{ 
-              scale: cardScale,
-              y: cardY,
-              rotateX: cardRotateX,
-              opacity: cardOpacity,
-              transformStyle: "preserve-3d"
-            }}
-            className="w-full flex justify-center mb-8 origin-top"
-          >
-            <CreativeLicenseCard />
-          </motion.div>
-
-          {/* Subtitles & Descriptions */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 1 }}
-            style={{ opacity: heroFade }}
-            className="flex flex-col items-center gap-6 text-center mt-4"
-          >
-            <div className="font-mono text-[9px] md:text-xs tracking-[0.3em] text-text-secondary flex flex-col md:flex-row gap-2 md:gap-4 uppercase">
-              <span>Diretor Criativo</span>
-              <span className="hidden md:inline">•</span>
-              <span>Desenvolvedor</span>
-              <span className="hidden md:inline">•</span>
-              <span>Designer Visual</span>
-              <span className="hidden md:inline">•</span>
-              <span>Criativo Multidisciplinar</span>
-            </div>
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 1.5 }}
-            style={{ opacity: heroFade }}
-            className="absolute bottom-12"
-          >
-            <a 
-              href="#mastimverse" 
-              className="font-mono text-[10px] tracking-widest text-mastim-red hover:text-text-primary transition-colors duration-300 flex flex-col items-center gap-2 group"
-            >
-              ENTRAR NO MASTIMVERSE
-              <motion.span 
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="group-hover:text-mastim-red text-text-secondary transition-colors"
-              >
-                ↓
-              </motion.span>
-            </a>
-          </motion.div>
-
-        </div>
       </motion.div>
     </section>
   );

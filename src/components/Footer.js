@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import CreativeLicenseCard from "@/components/ui/CreativeLicenseCard";
 
 export default function Footer() {
   return (
@@ -55,24 +56,9 @@ export default function Footer() {
           </button>
         </div>
 
-        {/* Column 3: Interactive Video Card */}
-        <div className="w-full flex items-center justify-center lg:justify-end [perspective:1000px]">
-          <motion.div 
-            whileHover={{ scale: 1.03, rotateY: -5, rotateX: 5 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full max-w-[450px] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_60px_rgba(229,43,26,0.25)] transition-shadow duration-500 cursor-pointer"
-          >
-            {/* object-cover without fixed aspect ratio forces the video to use its native framing but fill width */}
-            <video 
-              src="/mastim_video.mp4" 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="w-full h-auto object-cover bg-black"
-              style={{ maxHeight: "600px" }}
-            />
-          </motion.div>
+        {/* Column 3: Creative License Card */}
+        <div className="w-full flex items-center justify-center lg:justify-end">
+          <CreativeLicenseCard className="p-0 max-w-[460px] w-full" />
         </div>
 
       </div>
@@ -83,8 +69,7 @@ export default function Footer() {
             Direção Criativa / Design / Tecnologia
           </div>
           
-          <div className="font-mono text-[10px] text-mastim-red tracking-widest flex items-center gap-2 uppercase">
-            <span className="w-2 h-2 rounded-full bg-mastim-red animate-pulse" />
+          <div className="font-mono text-[10px] text-mastim-red tracking-widest uppercase">
             STATUS: CRIANDO.
           </div>
         </div>

@@ -72,13 +72,6 @@ export default function Websites() {
               <span className="font-semibold text-text-primary">de Sites</span>
             </h2>
           </div>
-
-          <div className="flex items-center gap-8 md:gap-12">
-            <p className="font-sans text-[10px] md:text-xs text-text-secondary max-w-[220px] leading-relaxed uppercase">
-              Interfaces modernas, responsivas e focadas em conversão, com design imersivo.
-            </p>
-            <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-mastim-red shadow-[0_0_40px_rgba(229,43,26,0.3)]"></div>
-          </div>
         </div>
 
         {/* VIDEOS GRID (EUA) */}
